@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UU Cyber Warriors</title>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --primary-color: #00ffb3;
+            --secondary-color: #ff00d4;
+            --dark-bg: #0a0a1f;
+            --card-bg: rgba(10, 10, 31, 0.7);
+            --border-glow: rgba(0, 255, 179, 0.3);
+            --text-glow: rgba(0, 255, 179, 0.8);
+            --accent-color: #9f00ff;
+            --gradient-1: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            --gradient-2: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+        }
+
+        body {
+            background: linear-gradient(
+                135deg,
+                var(--dark-bg),
+                #150a29,
+                #1a0a33,
+                var(--dark-bg)
+            );
+            color: white;
+            line-height: 1.6;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            perspective: 1000px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        /* Section Container */
+        .sections-container {
+            height: 100vh;
+            position: relative;
+            transition: transform 0.7s ease;
+        }
+
+        section {
+            height: 100vh;
+            width: 100vw;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        section.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px var(--primary-color);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* About Section */
+        .about {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 50px 0;
+        }
+
+        .about-menu {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1200px;
+            width: 90%;
+        }
+
+        .about-item {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+
+        .about-item:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 20px var(--border-glow);
+        }
+
+        .about-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        /* Team Section */
+        .team {
+            padding: 50px 0;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .team-member {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 30px var(--border-glow);
+        }
+
+        .member-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .member-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .member-social {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-icon {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: var(--gradient-1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            transform: scale(1.2);
+            background: var(--gradient-2);
+        }
+
+        /* Hero Buttons */
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .hero-btn {
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .join-btn {
+            background: var(--gradient-1);
+            color: white;
+            box-shadow: 0 0 20px var(--primary-color);
+        }
+
+        .explore-btn {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            box-shadow: 0 0 15px var(--border-glow);
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px var(--text-glow);
+        }
+
+        .join-btn:hover {
+            background: var(--gradient-2);
+        }
+
+        .explore-btn:hover {
+            background: var(--primary-color);
+            color: var(--dark-bg);
+        }
+
+        /* Modified Navigation Dot Styles */
+        .nav-menu {
+            position: fixed;
+            top: 50%;
+            right: 30px;
+            transform: translateY(-50%);
+            z-index: 1000;
+            background: rgba(10, 10, 31, 0.6);
+            padding: 15px 10px;
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-menu .nav-dot {
+            width: 12px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            margin: 20px 0;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu .nav-dot::before {
+            content: attr(data-tooltip);
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--gradient-1);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 15px;
+            font-size: 14px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px var(--primary-color);
+        }
+
+        .nav-menu .nav-dot:hover::before {
+            opacity: 1;
+            right: 35px;
+        }
+
+        .nav-menu .nav-dot:hover {
+            background: var(--primary-color);
+            box-shadow: 0 0 15px var(--primary-color);
+            transform: scale(1.2);
+        }
+
+        .nav-menu .nav-dot.active {
+            background: var(--primary-color);
+            box-shadow: 0 0 20px var(--primary-color);
+        }
+
+        .nav-menu .nav-dot.active::before {
+            opacity: 1;
+            right: 35px;
+            background: var(--gradient-2);
+        }
+
+        /* Rest of your existing styles remain the same */
+        /* ... */
+
+        .logo {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            text-shadow: 0 0 15px var(--primary-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 20px 40px;
+            font-family: 'Permanent Marker', cursive;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 2px solid var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover img {
+            transform: rotate(360deg);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .modal img {
+            max-width: 90%;
+            max-height: 90vh;
+            border-radius: 10px;
+            box-shadow: 0 0 30px var(--primary-color);
+        }
+
+        /* Mobile Navigation */
+        @media (max-width: 768px) {
+            .nav-menu {
+                bottom: 20px;
+                right: 50%;
+                top: auto;
+                transform: translateX(50%);
+                display: flex;
+                gap: 20px;
+                padding: 15px 25px;
+            }
+
+            .nav-menu .nav-dot {
+                margin: 0;
+            }
+
+            .nav-menu .nav-dot::before {
+                bottom: 35px;
+                right: 50%;
+                top: auto;
+                transform: translateX(50%);
+            }
+
+            .nav-menu .nav-dot:hover::before {
+                bottom: 40px;
+                right: 50%;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+                padding: 0 20px;
+            }
+
+            .logo {
+                font-size: 1.8rem;
+                padding: 15px 25px;
+            }
+
+            .logo img {
+                width: 50px;
+                height: 50px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .hero-btn {
+                width: 80%;
+                max-width: 300px;
+            }
+
+            .about-menu {
+                grid-template-columns: 1fr;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+
+        @keyframes particleFloat {
+            0% { transform: translate3d(0, 0, 0) rotate(0deg); }
+            100% { transform: translate3d(100px, -100px, 50px) rotate(360deg); }
+        }
+
+        /* Star Background */
+        .star {
+            position: absolute;
+            background: var(--primary-color);
+            border-radius: 50%;
+            opacity: 0;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Creative Navigation -->
+    <div class="logo">
+        <img src="/api/placeholder/40/40" alt="Logo">
+        UU Cyber Warriors
+    </div>
+    
+    <nav class="nav-menu">
+        <div class="nav-dot active" data-tooltip="Home"></div>
+        <div class="nav-dot" data-tooltip="About"></div>
+        <div class="nav-dot" data-tooltip="Events"></div>
+        <div class="nav-dot" data-tooltip="Team"></div>
+        <div class="nav-dot" data-tooltip="Gallery"></div>
+    </nav>
+
+    <div class="sections-container">
+        <!-- Hero Section -->
+        <section class="hero active">
+            <div class="hero-content">
+                <h1>Welcome to UU Cyber Warriors</h1>
+                <p>Securing the digital frontier, one byte at a time</p>
+                <div class="hero-buttons">
+                    <button class="hero-btn join-btn">Join Now</button>
+                    <button class="hero-btn explore-btn">Explore More</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="about">
+            <div class="about-menu">
+                <div class="about-item">
+                    <div class="about-icon">🎯</div>
+                    <h3>Our Mission</h3>
+                    <p>Empowering students with cybersecurity knowledge and practical skills</p>
+                </div>
+                <div class="about-item">
+                    <div class="about-icon">🌟</div>
+                    <h3>Our Vision</h3>
+                    <p>Creating the next generation of cyber security professionals</p>
+                </div>
+                <div class="about-item">
+                    <div class="about-icon">📚</div>
+                    <h3>Our Programs</h3>
+                    <p>Comprehensive training in ethical hacking and security</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <section class="team">
+            <div class="team-grid">
+                <!-- Mentors -->
+                <div class="team-member">
+                    <img src="/api/placeholder/300/300" alt="Mentor" class="member-img">
+                    <div class="member-info">
+                        <h3>Dr. Sarah Wilson</h3>
+                        <p>Lead Mentor</p>
+                        <div class="member-social">
+                            <a href="#" class="social-icon">🌐</a>
+                            <a href="#" class="social-icon">📧</a>
+                            <a href="#" class="social-icon">💼</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tech Team -->
+                <div class="team-member">
+                    <img src="/api/placeholder/300/300" alt="Tech Lead" class="member-img">
+                    <div class="member-info">
+                        <h3>Alex Chen</h3>
+                        <p>Tech Lead</p>
+                        <div class="member-social">
+                            <a href="#" class="social-icon">🌐</a>
+                            <a href="#" class="social-icon">📧</a>
+                            <a href="#" class="social-icon">💼</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Branding Team -->
+                <div class="team-member">
+                    <img src="/api/placeholder/300/300" alt="Branding Lead" class="member-img">
+                    <div class="member-info">
+                        <h3>Emma Thompson</h3>
+                        <p>Branding Lead</p>
+                        <div class="member-social">
+                            <a href="#" class="social-icon">🌐</a>
+                            <a href="#" class="social-icon">📧</a>
+                            <a href="#" class="social-icon">💼</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Executives -->
+                <div class="team-member">
+                    <img src="/api/placeholder/300/300" alt="Executive" class="member-img">
+                    <div class="member-info">
+                        <h3>James Anderson</h3>
+                        <p>President</p>
+                        <div class="member-social">
+                            <a href="#" class="social-icon">🌐</a>
+                            <a href="#" class="social-icon">📧</a>
+                            <a href="#" class="social-icon">💼</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="imageModal">
+        <img id="modalImage" src="" alt="Modal Image">
+    </div>
+
+    <script>
+        // Navigation dot click handling with section switching
+        document.querySelectorAll('.nav-dot').forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                // Remove active class from all sections and dots
+                document.querySelectorAll('section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.querySelectorAll('.nav-dot').forEach(dot => {
+                    dot.classList.remove('active');
+                });
+                
+                // Add active class to clicked dot and corresponding section
+                dot.classList.add('active');
+                const sections = document.querySelectorAll('section');
+                if (sections[index]) {
+                    sections[index].classList.add('active');
+                }
+            });
+        });
+
+        // Create stars background
+        function createStars() {
+            const hero = document.querySelector('.hero');
+            for (let i = 0; i < 50; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.cssText = `
+                    width: ${Math.random() * 3}px;
+                    height: ${Math.random() * 3}px;
+                    top: ${Math.random() * 100}%;
+                    left: ${Math.random() * 100}%;
+                    animation-delay: ${Math.random() * 3}s;
+                `;
+                hero.appendChild(star);
+            }
+        }
+
+        // Initialize stars on load
+        window.addEventListener('load', createStars);
+    </script>
+</body>
+</html>
