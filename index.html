@@ -140,9 +140,143 @@
             color: var(--primary-color);
         }
 
+        /* Events Section */
+        .events {
+            padding: 50px 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .events-heading {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px var(--border-glow);
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .events-heading::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 4px;
+            background: var(--gradient-1);
+            border-radius: 2px;
+            box-shadow: 0 0 10px var(--border-glow);
+        }
+
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 20px;
+            max-width: 1200px;
+            width: 90%;
+        }
+
+        .event-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .event-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 20px var(--border-glow);
+        }
+
+        .event-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .event-content {
+            padding: 20px;
+        }
+
+        .event-date {
+            color: var(--primary-color);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .event-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .event-description {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 15px;
+        }
+
+        .event-details {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .event-detail {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--primary-color);
+        }
+
+        .register-btn {
+            background: var(--gradient-1);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .register-btn:hover {
+            background: var(--gradient-2);
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px var(--border-glow);
+        }
+
         /* Team Section */
         .team {
             padding: 50px 0;
+            min-height: 100vh;
+            background: var(--dark-bg);
+        }
+
+        .team-category {
+            margin-bottom: 50px;
+        }
+
+        .category-title {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+            text-shadow: 0 0 15px var(--border-glow);
         }
 
         .team-grid {
@@ -150,6 +284,8 @@
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 30px;
             padding: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
         .team-member {
@@ -158,10 +294,12 @@
             overflow: hidden;
             transition: all 0.3s ease;
             position: relative;
+            border: 1px solid transparent;
         }
 
         .team-member:hover {
             transform: translateY(-10px);
+            border-color: var(--primary-color);
             box-shadow: 0 0 30px var(--border-glow);
         }
 
@@ -169,11 +307,29 @@
             width: 100%;
             height: 300px;
             object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .team-member:hover .member-img {
+            transform: scale(1.1);
         }
 
         .member-info {
             padding: 20px;
             text-align: center;
+            background: linear-gradient(to top, var(--card-bg) 80%, transparent);
+        }
+
+        .member-info h3 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .member-info p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+            margin-bottom: 15px;
         }
 
         .member-social {
@@ -192,11 +348,33 @@
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
+            text-decoration: none;
+            color: white;
         }
 
         .social-icon:hover {
             transform: scale(1.2);
             background: var(--gradient-2);
+        }
+
+        @media (max-width: 768px) {
+            .category-title {
+                font-size: 1.5rem;
+            }
+
+            .team-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 20px;
+                padding: 10px;
+            }
+
+            .member-img {
+                height: 250px;
+            }
+
+            .member-info h3 {
+                font-size: 1.2rem;
+            }
         }
 
         /* Hero Buttons */
@@ -434,6 +612,15 @@
             .team-grid {
                 grid-template-columns: 1fr;
             }
+
+            .events-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .events-heading {
+                font-size: 2rem;
+                padding: 0 20px;
+            }
         }
 
         /* Animations */
@@ -511,64 +698,329 @@
             </div>
         </section>
 
+        <!-- Events Section -->
+        <section class="events">
+            <h2 class="events-heading">Latest Events</h2>
+            <div class="events-grid" id="events-container">
+                <!-- Events will be loaded dynamically -->
+            </div>
+        </section>
+
+        <script>
+            // Fetch events from API
+            async function fetchEvents() {
+                try {
+                    const response = await fetch('/api/events');
+                    const events = await response.json();
+                    
+                    const eventsContainer = document.getElementById('events-container');
+                    
+                    events.forEach(event => {
+                        const eventCard = `
+                            <div class="event-card">
+                                <img src="${event.image}" alt="${event.title}" class="event-image">
+                                <div class="event-content">
+                                    <div class="event-date">${event.date}</div>
+                                    <h3 class="event-title">${event.title}</h3>
+                                    <p class="event-description">${event.description}</p>
+                                    <div class="event-details">
+                                        <span class="event-detail">📍 ${event.venue}</span>
+                                        <span class="event-detail">⏰ ${event.time}</span>
+                                    </div>
+                                    <a href="${event.registrationLink}" class="register-btn">Register Now</a>
+                                </div>
+                            </div>
+                        `;
+                        eventsContainer.innerHTML += eventCard;
+                    });
+
+                } catch (error) {
+                    console.error('Error fetching events:', error);
+                    document.getElementById('events-container').innerHTML = '<p>Failed to load events. Please try again later.</p>';
+                }
+            }
+
+            // Call the function when the page loads
+            document.addEventListener('DOMContentLoaded', fetchEvents);
+        </script>
+
         <!-- Team Section -->
         <section class="team">
-            <div class="team-grid">
-                <!-- Mentors -->
-                <div class="team-member">
-                    <img src="/api/placeholder/300/300" alt="Mentor" class="member-img">
-                    <div class="member-info">
-                        <h3>Dr. Sarah Wilson</h3>
-                        <p>Lead Mentor</p>
-                        <div class="member-social">
-                            <a href="#" class="social-icon">🌐</a>
-                            <a href="#" class="social-icon">📧</a>
-                            <a href="#" class="social-icon">💼</a>
+            <!-- Team Members -->
+            <div class="team-category">
+                <h2 class="category-title">Our Team</h2>
+            <div class="team-categories-wrapper">
+                <button class="nav-btn prev-btn">❮</button>
+                <div class="team-categories">
+                    <!-- Mentors Category -->
+                    <div class="team-category-card">
+                        <div class="card-inner">
+                            <div class="category-icon pulse">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                            </div>
+                            <h3>Mentors</h3>
+                            <p>Expert guidance and support for your journey</p>
+                            <div class="category-stats">
+                                <span class="stat-badge">10+ Experts</span>
+                                <span class="stat-badge">500+ Hours</span>
+                            </div>
+                            <a href="#" class="category-btn">Learn More</a>
                         </div>
                     </div>
-                </div>
 
-                <!-- Tech Team -->
-                <div class="team-member">
-                    <img src="/api/placeholder/300/300" alt="Tech Lead" class="member-img">
-                    <div class="member-info">
-                        <h3>Alex Chen</h3>
-                        <p>Tech Lead</p>
-                        <div class="member-social">
-                            <a href="#" class="social-icon">🌐</a>
-                            <a href="#" class="social-icon">📧</a>
-                            <a href="#" class="social-icon">💼</a>
+                    <!-- Tech Category -->
+                    <div class="team-category-card">
+                        <div class="card-inner">
+                            <div class="category-icon pulse">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <h3>Tech</h3>
+                            <p>Building innovative solutions with cutting-edge technology</p>
+                            <div class="category-stats">
+                                <span class="stat-badge">5+ Teams</span>
+                                <span class="stat-badge">20+ Projects</span>
+                            </div>
+                            <a href="#" class="category-btn">Learn More</a>
                         </div>
                     </div>
-                </div>
 
-                <!-- Branding Team -->
-                <div class="team-member">
-                    <img src="/api/placeholder/300/300" alt="Branding Lead" class="member-img">
-                    <div class="member-info">
-                        <h3>Emma Thompson</h3>
-                        <p>Branding Lead</p>
-                        <div class="member-social">
-                            <a href="#" class="social-icon">🌐</a>
-                            <a href="#" class="social-icon">📧</a>
-                            <a href="#" class="social-icon">💼</a>
+                    <!-- Design Category -->
+                    <div class="team-category-card">
+                        <div class="card-inner">
+                            <div class="category-icon pulse">
+                                <i class="fas fa-pencil-ruler"></i>
+                            </div>
+                            <h3>Design & Editing</h3>
+                            <p>Creating stunning visuals and engaging content</p>
+                            <div class="category-stats">
+                                <span class="stat-badge">3+ Teams</span>
+                                <span class="stat-badge">100+ Designs</span>
+                            </div>
+                            <a href="#" class="category-btn">Learn More</a>
                         </div>
                     </div>
-                </div>
 
-                <!-- Executives -->
-                <div class="team-member">
-                    <img src="/api/placeholder/300/300" alt="Executive" class="member-img">
-                    <div class="member-info">
-                        <h3>James Anderson</h3>
-                        <p>President</p>
-                        <div class="member-social">
-                            <a href="#" class="social-icon">🌐</a>
-                            <a href="#" class="social-icon">📧</a>
-                            <a href="#" class="social-icon">💼</a>
+                    <!-- Branding Category -->
+                    <div class="team-category-card">
+                        <div class="card-inner">
+                            <div class="category-icon pulse">
+                                <i class="fas fa-bullhorn"></i>
+                            </div>
+                            <h3>Branding</h3>
+                            <p>Building and maintaining strong brand presence</p>
+                            <div class="category-stats">
+                                <span class="stat-badge">4+ Campaigns</span>
+                                <span class="stat-badge">15+ Brands</span>
+                            </div>
+                            <a href="#" class="category-btn">Learn More</a>
+                        </div>
+                    </div>
+
+                    <!-- Management Category -->
+                    <div class="team-category-card">
+                        <div class="card-inner">
+                            <div class="category-icon pulse">
+                                <i class="fas fa-tasks"></i>
+                            </div>
+                            <h3>Management</h3>
+                            <p>Coordinating and executing successful initiatives</p>
+                            <div class="category-stats">
+                                <span class="stat-badge">3+ Teams</span>
+                                <span class="stat-badge">25+ Events</span>
+                            </div>
+                            <a href="#" class="category-btn">Learn More</a>
                         </div>
                     </div>
                 </div>
+                <button class="nav-btn next-btn">❯</button>
+            </div>
+
+            <style>
+                .team-categories-wrapper {
+                    position: relative;
+                    padding: 0 40px;
+                    margin: 2rem auto;
+                    max-width: 1200px;
+                }
+
+                .team-categories {
+                    display: flex;
+                    overflow-x: auto;
+                    scroll-behavior: smooth;
+                    -ms-overflow-style: none;
+                    scrollbar-width: none;
+                    gap: 2rem;
+                    padding: 1rem 0;
+                }
+
+                .team-categories::-webkit-scrollbar {
+                    display: none;
+                }
+
+                .team-category-card {
+                    flex: 0 0 300px;
+                    perspective: 1000px;
+                }
+
+                .card-inner {
+                    background: rgba(255, 255, 255, 0.1);
+                    backdrop-filter: blur(10px);
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    border-radius: 20px;
+                    padding: 2rem;
+                    text-align: center;
+                    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+                    transition: all 0.6s ease;
+                }
+
+                .card-inner:hover {
+                    transform: translateY(-10px);
+                    background: rgba(255, 255, 255, 0.15);
+                    border: 1px solid rgba(255, 255, 255, 0.3);
+                    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.25);
+                }
+
+                .category-icon {
+                    font-size: 2.5rem;
+                    color: #007bff;
+                    margin-bottom: 1.5rem;
+                    text-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+                }
+
+                .pulse {
+                    animation: pulse 2s infinite;
+                }
+
+                @keyframes pulse {
+                    0% { transform: scale(1); opacity: 1; }
+                    50% { transform: scale(1.1); opacity: 0.8; }
+                    100% { transform: scale(1); opacity: 1; }
+                }
+
+                .team-category-card h3 {
+                    color: #fff;
+                    font-size: 1.8rem;
+                    margin-bottom: 1rem;
+                    font-weight: 600;
+                    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                }
+
+                .team-category-card p {
+                    color: rgba(255, 255, 255, 0.8);
+                    font-size: 1rem;
+                    margin-bottom: 1.5rem;
+                    line-height: 1.6;
+                }
+
+                .category-stats {
+                    display: flex;
+                    justify-content: center;
+                    gap: 1rem;
+                    margin-bottom: 1.5rem;
+                    flex-wrap: wrap;
+                }
+
+                .stat-badge {
+                    background: linear-gradient(135deg, rgba(0, 123, 255, 0.8), rgba(0, 198, 255, 0.8));
+                    padding: 0.6rem 1.2rem;
+                    border-radius: 25px;
+                    font-size: 0.9rem;
+                    color: white;
+                    font-weight: 500;
+                    backdrop-filter: blur(5px);
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                }
+
+                .category-btn {
+                    display: inline-block;
+                    padding: 1rem 2rem;
+                    background: linear-gradient(135deg, rgba(0, 123, 255, 0.8), rgba(0, 198, 255, 0.8));
+                    color: white;
+                    text-decoration: none;
+                    border-radius: 30px;
+                    font-weight: 600;
+                    transition: all 0.3s ease;
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    backdrop-filter: blur(5px);
+                }
+
+                .category-btn:hover {
+                    transform: translateY(-2px);
+                    background: linear-gradient(135deg, rgba(0, 86, 179, 0.9), rgba(0, 123, 255, 0.9));
+                    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+                }
+
+                .nav-btn {
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    background: rgba(255, 255, 255, 0.1);
+                    backdrop-filter: blur(5px);
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    cursor: pointer;
+                    font-size: 1.2rem;
+                    color: #fff;
+                    transition: all 0.3s ease;
+                    z-index: 2;
+                }
+
+                .prev-btn { left: 0; }
+                .next-btn { right: 0; }
+
+                .nav-btn:hover {
+                    background: rgba(0, 123, 255, 0.8);
+                    border-color: rgba(255, 255, 255, 0.3);
+                }
+
+                @media (max-width: 768px) {
+                    .team-categories-wrapper {
+                        padding: 0 30px;
+                    }
+
+                    .team-category-card {
+                        flex: 0 0 250px;
+                    }
+
+                    .card-inner {
+                        padding: 1.5rem;
+                    }
+                }
+
+                @media (max-width: 480px) {
+                    .team-categories-wrapper {
+                        padding: 0 20px;
+                    }
+
+                    .team-category-card {
+                        flex: 0 0 200px;
+                    }
+
+                    .card-inner {
+                        padding: 1rem;
+                    }
+
+                    .category-btn {
+                        padding: 0.8rem 1.5rem;
+                    }
+                }
+            </style>
+
+            <script>
+                const categoriesWrapper = document.querySelector('.team-categories');
+                const prevBtn = document.querySelector('.prev-btn');
+                const nextBtn = document.querySelector('.next-btn');
+
+                nextBtn.addEventListener('click', () => {
+                    categoriesWrapper.scrollLeft += 320;
+                });
+
+                prevBtn.addEventListener('click', () => {
+                    categoriesWrapper.scrollLeft -= 320;
+                });
+            </script>
             </div>
         </section>
     </div>
@@ -579,6 +1031,42 @@
     </div>
 
     <script>
+        // Event data in JSON format
+        const eventsData = {
+            "events": [
+                {
+                    "id": 1,
+                    "title": "Cyber Security Workshop",
+                    "date": "2023-10-15",
+                    "time": "10:00 AM",
+                    "venue": "Main Auditorium",
+                    "description": "Learn about the latest cyber security threats and defense mechanisms.",
+                    "image": "/api/placeholder/400/200",
+                    "registration_link": "#"
+                },
+                {
+                    "id": 2,
+                    "title": "Ethical Hacking Competition",
+                    "date": "2023-11-01",
+                    "time": "9:00 AM",
+                    "venue": "Lab Complex",
+                    "description": "Test your skills in our annual ethical hacking competition.",
+                    "image": "/api/placeholder/400/200",
+                    "registration_link": "#"
+                },
+                {
+                    "id": 3,
+                    "title": "Industry Expert Talk",
+                    "date": "2023-12-05",
+                    "time": "2:00 PM",
+                    "venue": "Conference Hall",
+                    "description": "Interactive session with leading cybersecurity experts.",
+                    "image": "/api/placeholder/400/200",
+                    "registration_link": "#"
+                }
+            ]
+        };
+
         // Navigation dot click handling with section switching
         document.querySelectorAll('.nav-dot').forEach((dot, index) => {
             dot.addEventListener('click', () => {
