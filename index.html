@@ -1302,12 +1302,12 @@
         <!-- Contact Section -->
         <section class="contact" id="contact">
             <div class="contact-container">
-                <h2 class="contact-heading">Get In Touch</h2>
+                <h2 class="contact-heading" style="margin-top: 2rem;">Get In Touch</h2>
                 <div class="contact-wrapper">
                     <div class="contact-info">
                         <div class="contact-card">
                             <div class="contact-icon">
-                                <img src="https://cdn-icons-png.flaticon.com/512/3178/3178158.png" alt="Email Icon" width="50" height="50">
+                                <img src="https://cdn-icons-png.flaticon.com/512/3178/3178158.png" alt="Email Icon" width="40" height="40">
                             </div>
                             <h3>Email Us</h3>
                             <p><a href="mailto:support@uucybers.live">support@uucybers.live</a></p>
@@ -1315,18 +1315,18 @@
 
                         <div class="contact-card">
                             <div class="contact-icon">
-                                <img src="https://cdn-icons-png.flaticon.com/512/1865/1865269.png" alt="Location Icon" width="50" height="50">
+                                <img src="https://cdn-icons-png.flaticon.com/512/1865/1865269.png" alt="Location Icon" width="40" height="40">
                             </div>
                             <h3>Visit Us</h3>
                             <p>UU Cyber Warriors Club<br>
                                USCS Department<br>
                                Uttaranchal University<br>
-                               Premnagar, Dehradun - 248007</p>
+                               Premnagar, Dehradun</p>
                         </div>
 
                         <div class="contact-card">
                             <div class="contact-icon">
-                                <img src="https://cdn-icons-png.flaticon.com/512/2784/2784459.png" alt="Clock Icon" width="50" height="50">
+                                <img src="https://cdn-icons-png.flaticon.com/512/2784/2784459.png" alt="Clock Icon" width="40" height="40">
                             </div>
                             <h3>Club Hours</h3>
                             <p>Monday - Friday<br>
@@ -1337,17 +1337,17 @@
                     <div class="social-links">
                         <h3>Connect With Us</h3>
                         <div class="social-icons">
-                            <a href="#" class="social-icon">
-                                <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" width="30" height="30">
+                            <a href="https://facebook.com" target="_blank" class="social-icon">
+                                <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" width="25" height="25">
                             </a>
-                            <a href="#" class="social-icon">
-                                <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube" width="30" height="30">
+                            <a href="https://youtube.com" target="_blank" class="social-icon">
+                                <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube" width="25" height="25">
                             </a>
-                            <a href="#" class="social-icon">
-                                <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" width="30" height="30">
+                            <a href="https://instagram.com" target="_blank" class="social-icon">
+                                <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" width="25" height="25">
                             </a>
-                            <a href="#" class="social-icon">
-                                <img src="https://cdn-icons-png.flaticon.com/512/3536/3536505.png" alt="LinkedIn" width="30" height="30">
+                            <a href="https://linkedin.com" target="_blank" class="social-icon">
+                                <img src="https://cdn-icons-png.flaticon.com/512/3536/3536505.png" alt="LinkedIn" width="25" height="25">
                             </a>
                         </div>
                     </div>
@@ -1356,111 +1356,134 @@
         </section>
 
         <style>
+            .contact {
+                padding: 2rem 0;
+                background: rgba(10, 10, 31, 0.9);
+            }
+
             .contact-container {
                 max-width: 1200px;
                 margin: 0 auto;
-                padding: 0 2rem;
+                padding: 1rem;
             }
 
             .contact-heading {
                 text-align: center;
                 font-size: 2.5rem;
-                margin-bottom: 3rem;
+                margin-bottom: 2rem;
                 color: var(--primary-color);
-                text-shadow: 0 0 10px var(--text-glow);
+                text-shadow: 0 0 15px var(--text-glow);
+                font-weight: bold;
             }
 
             .contact-wrapper {
                 display: flex;
                 flex-direction: column;
-                gap: 3rem;
+                gap: 2rem;
             }
 
             .contact-info {
                 display: grid;
                 grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                gap: 2rem;
+                gap: 1.5rem;
             }
 
             .contact-card {
-                background: rgba(255, 255, 255, 0.05);
-                padding: 2rem;
+                background: rgba(255, 255, 255, 0.08);
+                padding: 1.5rem;
                 border-radius: 15px;
-                backdrop-filter: blur(10px);
+                backdrop-filter: blur(15px);
                 text-align: center;
-                transition: transform 0.3s ease;
+                transition: all 0.4s ease;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             }
 
             .contact-card:hover {
                 transform: translateY(-10px);
+                background: rgba(255, 255, 255, 0.12);
+                border: 1px solid var(--primary-color);
             }
 
             .contact-icon {
                 margin-bottom: 1rem;
-                transition: transform 0.3s ease;
+                transition: transform 0.4s ease;
             }
 
             .contact-icon:hover {
-                transform: scale(1.1);
+                transform: scale(1.15);
             }
 
             .contact-card h3 {
                 color: var(--primary-color);
-                margin-bottom: 1rem;
+                margin-bottom: 0.8rem;
                 font-size: 1.2rem;
+                font-weight: bold;
             }
 
             .contact-card p {
                 color: #fff;
-                line-height: 1.6;
+                line-height: 1.5;
+                font-size: 0.9rem;
             }
 
             .contact-card a {
                 color: #fff;
                 text-decoration: none;
-                transition: color 0.3s ease;
+                transition: all 0.3s ease;
+                font-weight: 500;
             }
 
             .contact-card a:hover {
                 color: var(--primary-color);
+                text-shadow: 0 0 8px var(--text-glow);
             }
 
             .social-links {
                 text-align: center;
+                padding-top: 1rem;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+                margin-top: 1rem;
             }
 
             .social-links h3 {
                 color: var(--primary-color);
                 margin-bottom: 1.5rem;
                 font-size: 1.5rem;
+                font-weight: bold;
             }
 
             .social-icons {
                 display: flex;
                 justify-content: center;
                 gap: 1.5rem;
+                flex-wrap: wrap;
+                margin: 0 auto;
+                max-width: 300px;
             }
 
             .social-icon {
-                width: 50px;
-                height: 50px;
+                width: 45px;
+                height: 45px;
                 border-radius: 50%;
-                background: rgba(255, 255, 255, 0.05);
+                background: rgba(255, 255, 255, 0.08);
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                color: #fff;
-                font-size: 1.5rem;
-                transition: all 0.3s ease;
+                transition: all 0.4s ease;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                cursor: pointer;
+                text-decoration: none;
             }
 
             .social-icon:hover {
                 background: var(--primary-color);
-                transform: translateY(-5px);
+                transform: translateY(-5px) rotate(360deg);
+                box-shadow: 0 0 15px var(--text-glow);
             }
 
             .social-icon img {
-                transition: transform 0.3s ease;
+                transition: transform 0.4s ease;
             }
 
             .social-icon:hover img {
@@ -1470,30 +1493,34 @@
             @media (max-width: 768px) {
                 .contact-heading {
                     font-size: 2rem;
+                    margin-bottom: 2rem;
                 }
 
                 .contact-info {
                     grid-template-columns: 1fr;
                 }
 
+                .contact-card {
+                    padding: 1.5rem;
+                }
+
                 .social-icons {
-                    flex-wrap: wrap;
+                    gap: 1rem;
                 }
             }
 
             @media (max-width: 480px) {
                 .contact-heading {
-                    font-size: 1.5rem;
+                    font-size: 1.8rem;
                 }
 
                 .contact-card {
-                    padding: 1.5rem;
+                    padding: 1.2rem;
                 }
 
                 .social-icon {
                     width: 40px;
                     height: 40px;
-                    font-size: 1.2rem;
                 }
             }
         </style>
