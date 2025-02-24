@@ -429,68 +429,95 @@
         .nav-menu {
             position: fixed;
             top: 50%;
-            right: 30px;
+            right: 40px;
             transform: translateY(-50%);
             z-index: 1000;
-            background: rgba(10, 10, 31, 0.6);
-            padding: 15px 10px;
-            border-radius: 30px;
+            background: rgba(10, 10, 31, 0.8);
+            padding: 20px 15px;
+            border-radius: 40px;
             backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 20px rgba(0, 255, 179, 0.2);
         }
 
         .nav-menu .nav-dot {
-            width: 12px;
-            height: 12px;
+            width: 20px;
+            height: 20px;
             background: rgba(255, 255, 255, 0.5);
             border-radius: 50%;
-            margin: 20px 0;
+            margin: 25px 0;
             cursor: pointer;
             position: relative;
             transition: all 0.3s ease;
+            border: 2px solid transparent;
         }
 
         .nav-menu .nav-dot::before {
             content: attr(data-tooltip);
             position: absolute;
-            right: 30px;
+            right: 35px;
             top: 50%;
             transform: translateY(-50%);
             background: var(--gradient-1);
             color: white;
-            padding: 8px 15px;
-            border-radius: 15px;
-            font-size: 14px;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 16px;
             white-space: nowrap;
             opacity: 0;
             pointer-events: none;
             transition: all 0.3s ease;
-            box-shadow: 0 0 15px var(--primary-color);
+            box-shadow: 0 0 20px var(--primary-color);
         }
 
         .nav-menu .nav-dot:hover::before {
             opacity: 1;
-            right: 35px;
+            right: 40px;
         }
 
         .nav-menu .nav-dot:hover {
             background: var(--primary-color);
-            box-shadow: 0 0 15px var(--primary-color);
-            transform: scale(1.2);
+            box-shadow: 0 0 20px var(--primary-color);
+            transform: scale(1.3);
         }
 
         .nav-menu .nav-dot.active {
             background: var(--primary-color);
-            box-shadow: 0 0 20px var(--primary-color);
+            box-shadow: 0 0 25px var(--primary-color);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: scale(1.2);
         }
 
-        .nav-menu .nav-dot.active::before {
-            opacity: 1;
-            right: 35px;
-            background: var(--gradient-2);
-        }
+        /* Mobile Navigation Adjustments */
+        @media (max-width: 768px) {
+            .nav-menu {
+                bottom: 30px;
+                right: 50%;
+                top: auto;
+                transform: translateX(50%);
+                display: flex;
+                gap: 25px;
+                padding: 20px 30px;
+            }
 
-        /* Rest of your existing styles remain the same */
-        /* ... */
+            .nav-menu .nav-dot {
+                margin: 0;
+                width: 18px;
+                height: 18px;
+            }
+
+            .nav-menu .nav-dot::before {
+                bottom: 40px;
+                right: 50%;
+                top: auto;
+                transform: translateX(50%);
+            }
+
+            .nav-menu .nav-dot:hover::before {
+                bottom: 45px;
+                right: 50%;
+            }
+        }
 
         .logo {
             position: fixed;
@@ -547,82 +574,6 @@
             box-shadow: 0 0 30px var(--primary-color);
         }
 
-        /* Mobile Navigation */
-        @media (max-width: 768px) {
-            .nav-menu {
-                bottom: 20px;
-                right: 50%;
-                top: auto;
-                transform: translateX(50%);
-                display: flex;
-                gap: 20px;
-                padding: 15px 25px;
-            }
-
-            .nav-menu .nav-dot {
-                margin: 0;
-            }
-
-            .nav-menu .nav-dot::before {
-                bottom: 35px;
-                right: 50%;
-                top: auto;
-                transform: translateX(50%);
-            }
-
-            .nav-menu .nav-dot:hover::before {
-                bottom: 40px;
-                right: 50%;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero p {
-                font-size: 1.2rem;
-                padding: 0 20px;
-            }
-
-            .logo {
-                font-size: 1.8rem;
-                padding: 15px 25px;
-            }
-
-            .logo img {
-                width: 50px;
-                height: 50px;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-                gap: 15px;
-            }
-
-            .hero-btn {
-                width: 80%;
-                max-width: 300px;
-            }
-
-            .about-menu {
-                grid-template-columns: 1fr;
-            }
-
-            .team-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .events-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .events-heading {
-                font-size: 2rem;
-                padding: 0 20px;
-            }
-        }
-
         /* Animations */
         @keyframes pulseGlow {
             0%, 100% { opacity: 0.5; transform: scale(1); }
@@ -648,6 +599,227 @@
             50% { opacity: 1; }
         }
 
+        /* Responsive Design Updates */
+        @media (max-width: 1024px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .about-menu {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .team-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* General Adjustments */
+            .container {
+                padding: 0 15px;
+            }
+
+            /* Hero Section */
+            .hero h1 {
+                font-size: 2rem;
+                padding: 0 15px;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+                padding: 0 15px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                gap: 15px;
+                padding: 0 15px;
+            }
+
+            .hero-btn {
+                width: 100%;
+                padding: 12px 30px;
+                font-size: 1rem;
+            }
+
+            /* About Section */
+            .about-menu {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 0 15px;
+            }
+
+            .about-item {
+                padding: 20px;
+            }
+
+            /* Events Section */
+            .events-heading {
+                font-size: 2rem;
+                padding: 0 15px;
+            }
+
+            .events-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 15px;
+            }
+
+            .event-card {
+                margin: 0 auto;
+                max-width: 400px;
+            }
+
+            /* Team Section */
+            .team-category-title {
+                font-size: 1.8rem;
+            }
+
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+                padding: 15px;
+            }
+
+            .member-img {
+                height: 200px;
+            }
+
+            /* Gallery Section */
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-card {
+                height: 250px;
+            }
+
+            .gallery-nav {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            /* Logo */
+            .logo {
+                font-size: 0.8rem;
+                padding: 10px 20px;
+            }
+
+            .logo img {
+                width: 50px;
+                height: 50px;
+            }
+
+            /* Hero Section */
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            /* Team Section */
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .member-info h3 {
+                font-size: 1.2rem;
+            }
+
+            /* Contact Section */
+            .contact-card {
+                padding: 15px;
+            }
+
+            .social-icons {
+                gap: 10px;
+            }
+
+            .social-icon {
+                width: 35px;
+                height: 35px;
+            }
+        }
+
+        /* Touch-friendly Adjustments */
+        @media (hover: none) {
+            .nav-menu .nav-dot::before {
+                display: none;
+            }
+
+            .about-item:hover,
+            .event-card:hover,
+            .team-member:hover,
+            .gallery-card:hover {
+                transform: none;
+            }
+
+            .hero-btn,
+            .register-btn,
+            .social-icon {
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            /* Increase touch targets */
+            .nav-dot,
+            .social-icon,
+            .gallery-nav {
+                min-width: 44px;
+                min-height: 44px;
+            }
+        }
+
+        /* Landscape Mode */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .hero {
+                padding: 60px 0;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .nav-menu {
+                display: flex;
+                flex-direction: row;
+                bottom: 20px;
+                right: 50%;
+                transform: translateX(50%);
+                top: auto;
+            }
+
+            .section {
+                min-height: 100vh;
+                height: auto;
+            }
+        }
+
+        /* Print Media */
+        @media print {
+            .nav-menu,
+            .hero-buttons,
+            .social-icons {
+                display: none;
+            }
+
+            body {
+                background: white;
+                color: black;
+            }
+
+            .hero h1,
+            .events-heading,
+            .team-category-title {
+                color: black;
+                text-shadow: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -671,7 +843,7 @@
         <section class="hero active">
             <div class="hero-content">
                 <h1>Welcome to UU Cyber Warriors</h1>
-                <p>Securing the digital frontier, one byte at a time</p>
+                <p>Guarding the digital world, one shield at a time.</p>
                 <div class="hero-buttons">
                     <button class="hero-btn join-btn">Join Now</button>
                     <button class="hero-btn explore-btn">Explore More</button>
