@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UU Cyber Warriors - Admin Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #00ffb3;
+            --secondary-color: #ff00d4;
+            --dark-bg: #0a0a1f;
+            --card-bg: rgba(10, 10, 31, 0.7);
+            --border-glow: rgba(0, 255, 179, 0.3);
+            --text-glow: rgba(0, 255, 179, 0.8);
+            --accent-color: #9f00ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--dark-bg), #150a29, #1a0a33, var(--dark-bg));
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            min-height: 100vh;
+            transition: all 0.3s ease;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            background: rgba(10, 10, 31, 0.9);
+            padding: 2rem;
+            border-right: 1px solid var(--border-glow);
+            box-shadow: 5px 0 15px rgba(0, 255, 179, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .sidebar-logo {
+            font-family: 'Press Start 2P', cursive;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 10px var(--text-glow);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-logo img {
+            transition: transform 0.5s ease;
+        }
+
+        .sidebar-logo:hover img {
+            transform: rotate(360deg);
+        }
+
+        .nav-links {
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin: 1rem 0;
+            transform: translateX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.8rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            left: -100%;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 179, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .nav-links a:hover::before {
+            left: 100%;
+        }
+
+        .nav-links a:hover {
+            background: rgba(0, 255, 179, 0.1);
+            color: var(--primary-color);
+            transform: translateX(10px);
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .search-bar {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border-glow);
+            border-radius: 20px;
+            padding: 0.5rem 1rem;
+            width: 300px;
+            transition: all 0.3s ease;
+        }
+
+        .search-bar:focus-within {
+            width: 350px;
+            box-shadow: 0 0 15px var(--border-glow);
+        }
+
+        .search-bar input {
+            background: none;
+            border: none;
+            color: white;
+            width: 100%;
+            outline: none;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-glow);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--border-glow) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .stat-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 5px 15px rgba(0, 255, 179, 0.2);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-shadow: 0 0 10px var(--text-glow);
+        }
+
+        .recent-activity {
+            background: var(--card-bg);
+            border: 1px solid var(--border-glow);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .activity-list {
+            list-style: none;
+        }
+
+        .activity-item {
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .activity-item:hover {
+            transform: translateX(10px);
+            background: rgba(0, 255, 179, 0.05);
+            padding: 1rem;
+            border-radius: 8px;
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 255, 179, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        .activity-item:hover .activity-icon {
+            transform: rotate(360deg);
+            background: var(--primary-color);
+            color: var(--dark-bg);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .dashboard-container {
+                grid-template-columns: 200px 1fr;
+            }
+            
+            .sidebar-logo {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-container {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: fixed;
+                left: -250px;
+                top: 0;
+                height: 100vh;
+                z-index: 1000;
+            }
+
+            .sidebar.active {
+                left: 0;
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-bar {
+                width: 100%;
+            }
+
+            .search-bar:focus-within {
+                width: 100%;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-content {
+                padding: 1rem;
+            }
+
+            .stat-card {
+                padding: 1rem;
+            }
+
+            .activity-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .activity-icon {
+                margin: 0 auto;
+            }
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 1001;
+            background: var(--primary-color);
+            border: none;
+            color: var(--dark-bg);
+            padding: 0.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="menu-toggle">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="logo.png" alt="UU Cyber Warriors" width="40" height="40">
+                <span>UUCW</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="#"><i class="fas fa-users"></i> Members</a></li>
+                <li><a href="#"><i class="fas fa-calendar"></i> Events</a></li>
+                <li><a href="#"><i class="fas fa-images"></i> Gallery</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <div class="header">
+                <h1>Welcome, Admin</h1>
+                <div class="search-bar">
+                    <input type="text" placeholder="Search...">
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Total Members</h3>
+                    <p class="stat-number">256</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Active Projects</h3>
+                    <p class="stat-number">12</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Events This Month</h3>
+                    <p class="stat-number">5</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Gallery Items</h3>
+                    <p class="stat-number">1,234</p>
+                </div>
+            </div>
+
+            <div class="recent-activity">
+                <h2>Recent Activity</h2>
+                <ul class="activity-list">
+                    <li class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <div class="activity-details">
+                            <h4>New Member Joined</h4>
+                            <p>John Doe joined the team</p>
+                            <small>2 hours ago</small>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-images"></i>
+                        </div>
+                        <div class="activity-details">
+                            <h4>New Gallery Item</h4>
+                            <p>Team completed Cyber Challenge</p>
+                            <small>5 hours ago</small>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="activity-details">
+                            <h4>Event Scheduled</h4>
+                            <p>Upcoming Hackathon</p>
+                            <small>1 day ago</small>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const menuToggle = document.querySelector('.menu-toggle');
+            const sidebar = document.querySelector('.sidebar');
+            
+            menuToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('active');
+            });
+
+            // Close sidebar when clicking outside on mobile
+            document.addEventListener('click', (e) => {
+                if (window.innerWidth <= 768 && 
+                    !sidebar.contains(e.target) && 
+                    !menuToggle.contains(e.target)) {
+                    sidebar.classList.remove('active');
+                }
+            });
+
+            // Animate stats on scroll
+            const statNumbers = document.querySelectorAll('.stat-number');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'countUp 1s ease forwards';
+                    }
+                });
+            });
+
+            statNumbers.forEach(number => observer.observe(number));
+
+            // Add hover effects to activity items
+            const activityItems = document.querySelectorAll('.activity-item');
+            activityItems.forEach(item => {
+                item.addEventListener('mouseenter', () => {
+                    item.style.transform = 'translateX(10px)';
+                });
+                item.addEventListener('mouseleave', () => {
+                    item.style.transform = 'translateX(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
