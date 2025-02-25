@@ -558,10 +558,8 @@
         }
 
         .logo img {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            border: 2px solid var(--primary-color);
+            width: 100px; /* Increased from 70px */
+            height: 100px; /* Increased from 70px */
             transition: all 0.3s ease;
         }
 
@@ -578,8 +576,8 @@
             }
 
             .logo img {
-                width: 30px;
-                height: 30px;
+                width: 50px; /* Increased from 30px */
+                height: 50px; /* Increased from 30px */
             }
         }
 
@@ -591,8 +589,8 @@
             }
 
             .logo img {
-                width: 25px;
-                height: 25px;
+                width: 40px; /* Increased from 25px */
+                height: 40px; /* Increased from 25px */
             }
         }
 
@@ -884,7 +882,7 @@
 <body>
     <!-- Creative Navigation -->
     <div class="logo">
-        <img src="/api/placeholder/40/40" alt="Logo">
+        <img src="logo.png" alt="Logo">
         UU Cyber Warriors
     </div>
     
@@ -1332,7 +1330,7 @@
 
         <!-- Gallery Section -->
         <section class="gallery">
-            <h2 class="gallery-heading">Photo Gallery</h2>
+            <h2 class="gallery-heading" style="font-family: 'Press Start 2P', cursive; font-size: 1.8rem;">Photo Gallery</h2>
             <div class="gallery-container">
                 <button class="gallery-nav prev">❮</button>
                 <div class="gallery-wrapper">
@@ -1533,7 +1531,7 @@
         <!-- Contact Section -->
         <section class="contact" id="contact">
             <div class="contact-container">
-                <h2 class="contact-heading" style="margin-top: 2rem;">Get In Touch</h2>
+                <h2 class="contact-heading" style="margin-top: 2rem; font-family: 'Press Start 2P', cursive; font-size: 1.8rem;">Get In Touch</h2>
                 <div class="contact-wrapper">
                     <div class="contact-info">
                         <div class="contact-card">
@@ -1724,7 +1722,6 @@
             @media (max-width: 768px) {
                 .contact-heading {
                     font-size: 2rem;
-                    margin-bottom: 2rem;
                 }
 
                 .contact-info {
