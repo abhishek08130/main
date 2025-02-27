@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join UU Cyber Warriors</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #00ffb3;
+            --secondary-color: #ff00d4;
+            --dark-bg: #0a0a1f;
+            --card-bg: rgba(10, 10, 31, 0.7);
+            --border-glow: rgba(0, 255, 179, 0.3);
+            --gradient-1: linear-gradient(135deg, #00ffb3 0%, #00b3ff 100%);
+            --gradient-2: linear-gradient(135deg, #ff00d4 0%, #00ffb3 100%);
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--dark-bg), #150a29, #1a0a33, var(--dark-bg));
+            color: white;
+            font-family: 'Poppins', ui-sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            width: 100vw;
+            overflow-x: hidden;
+            background-attachment: fixed;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="%2300ffb3" fill-opacity="0.05" d="M44.7,-76.4C58.8,-69.2,71.8,-59.1,79.6,-45.8C87.4,-32.5,90,-16.3,88.5,-1.5C87,13.3,81.4,26.7,73.6,38.4C65.8,50.1,55.7,60.2,43.2,67.8C30.7,75.4,15.3,80.5,0.6,79.5C-14.2,78.5,-28.4,71.4,-41.6,63.4C-54.8,55.4,-67,46.5,-74.4,34.2C-81.8,21.8,-84.4,5.9,-83.3,-9.8C-82.2,-25.5,-77.5,-41,-68.2,-53.2C-58.9,-65.4,-45,-74.3,-30.8,-81.4C-16.7,-88.5,-2.3,-93.8,11.2,-90.8C24.7,-87.8,49.3,-77.5,44.7,-76.4Z" transform="translate(100 100)" /></svg>') no-repeat center center;
+            background-size: 120% 120%;
+            opacity: 0.1;
+            z-index: -1;
+            animation: pulse 10s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        h1 {
+            font-family: 'Press Start 2P', cursive;
+            text-align: center;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 40px 0;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            animation: titleFloat 3s ease-in-out infinite;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            background-color: rgba(10, 10, 31, 0.95);
+            padding: 20px 0;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-glow);
+        }
+
+        @keyframes titleFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        #registrationForm {
+            width: 90vw;
+            max-width: 1400px;
+            min-height: calc(100vh - 100px);
+            margin: 120px auto 40px;
+            padding: 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            box-sizing: border-box;
+            perspective: 1000px;
+        }
+
+        .form-group {
+            opacity: 0;
+            animation: fadeIn 0.5s forwards, cardFloat 3s ease-in-out infinite;
+            padding: 25px;
+            background: var(--card-bg);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 2px solid transparent;
+            background-image: linear-gradient(var(--card-bg), var(--card-bg)), 
+                            linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            transform-style: preserve-3d;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .form-group:hover {
+            transform: translateY(-5px) rotateX(5deg);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes cardFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        label {
+            display: block;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        label::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-color);
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid var(--primary-color);
+            border-radius: 15px;
+            background: rgba(10, 10, 31, 0.3);
+            color: white;
+            font-size: clamp(1rem, 1.8vw, 1.1rem);
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(5px);
+            box-sizing: border-box;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            box-shadow: 0 0 25px var(--border-glow);
+            border-color: var(--secondary-color);
+            transform: scale(1.02);
+            background: rgba(10, 10, 31, 0.5);
+        }
+
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+            line-height: 1.6;
+        }
+
+        .form-group:last-child {
+            grid-column: 1 / -1;
+        }
+
+        button {
+            width: 100%;
+            padding: 20px;
+            background: var(--gradient-1);
+            border: none;
+            border-radius: 15px;
+            color: var(--dark-bg);
+            font-weight: bold;
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.4), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+        }
+
+        button:hover::before {
+            animation: shine 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes shine {
+            from { left: -50%; }
+            to { left: 100%; }
+        }
+
+        button:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 10px 30px var(--border-glow);
+            background: var(--gradient-2);
+        }
+
+        button:active {
+            transform: translateY(2px);
+        }
+
+        @media (max-width: 768px) {
+            #registrationForm {
+                grid-template-columns: 1fr;
+                padding: 20px;
+                margin-top: 100px;
+                width: 95vw;
+            }
+
+            .form-group {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.2rem;
+                padding: 15px 10px;
+            }
+
+            input, select, textarea {
+                padding: 12px 15px;
+            }
+
+            button {
+                padding: 15px;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .form-group {
+                padding: 15px;
+            }
+
+            label {
+                font-size: 0.9rem;
+            }
+
+            input, select, textarea {
+                font-size: 0.9rem;
+                padding: 10px;
+            }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gradient-1);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gradient-2);
+        }
+    </style>
+</head>
+<body>
+    <h1>Join UU Cyber Warriors</h1>
+    <form id="registrationForm" onsubmit="handleSubmit(event)">
+        <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" name="fullName" required placeholder="Enter your full name">
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" required placeholder="Enter your email">
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" required placeholder="Enter your phone number">
+        </div>
+
+        <div class="form-group">
+            <label for="enrollNo">University Enrollment Number</label>
+            <input type="text" id="enrollNo" name="enrollNo" required placeholder="Enter your enrollment number">
+        </div>
+
+        <div class="form-group">
+            <label for="course">Course</label>
+            <select id="course" name="course" required>
+                <option value="">Select your course</option>
+                <option value="btech">B.Tech</option>
+                <option value="mtech">M.Tech</option>
+                <option value="bca">BCA</option>
+                <option value="mca">MCA</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="year">Year of Study</label>
+            <select id="year" name="year" required>
+                <option value="">Select year</option>
+                <option value="1">1st Year</option>
+                <option value="2">2nd Year</option>
+                <option value="3">3rd Year</option>
+                <option value="4">4th Year</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="section">Section</label>
+            <input type="text" id="section" name="section" required placeholder="Enter your section">
+        </div>
+
+        <div class="form-group">
+            <label for="skills">Technical Skills</label>
+            <textarea id="skills" name="skills" rows="3" placeholder="List your technical skills, programming languages, tools etc." required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="interests">Why do you want to join us?</label>
+            <textarea id="interests" name="interests" rows="3" placeholder="Tell us about your interest in cybersecurity and what motivates you to join" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <button type="submit">Submit Application</button>
+        </div>
+    </form>
+
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData.entries());
+
+            console.log('Form submitted:', data);
+
+            alert('Thank you for your application! We will contact you soon.');
+            event.target.reset();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const formGroups = document.querySelectorAll('.form-group');
+            formGroups.forEach((group, index) => {
+                group.style.animationDelay = `${index * 0.1}s`;
+            });
+        });
+    </script>
+</body>
+</html>
