@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UU Cyber Warriors - Admin Dashboard</title>
+    <title>UU Cyber Warriors - Gallery</title>
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
@@ -206,16 +206,10 @@
             overflow: hidden;
         }
 
-        .header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--cyber-gradient);
-            opacity: 0.1;
-            pointer-events: none;
+        .header h1 {
+            font-size: 2rem;
+            color: var(--accent-color);
+            text-shadow: 0 0 10px rgba(100, 255, 218, 0.5);
         }
 
         .profile-section {
@@ -226,157 +220,217 @@
 
         .profile-section span {
             font-size: 1.1rem;
-            letter-spacing: 1px;
-            background: var(--cyber-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: bold;
+            color: var(--text-color);
         }
 
         .profile-section a {
             color: var(--text-color);
             text-decoration: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 12px;
-            transition: all 0.4s ease;
-            border: 2px solid var(--accent-color);
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .profile-section a::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: var(--cyber-gradient);
-            transition: all 0.4s ease;
-            z-index: -1;
-        }
-
-        .profile-section a:hover::before {
-            left: 0;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            background: rgba(100, 255, 218, 0.1);
+            border: 1px solid var(--accent-color);
+            transition: all 0.3s ease;
         }
 
         .profile-section a:hover {
+            background: var(--cyber-gradient);
             color: var(--dark-bg);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(100, 255, 218, 0.4);
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2.5rem;
-        }
-
-        .stat-card {
-            background: rgba(17, 34, 64, 0.95);
-            border: 2px solid var(--border-color);
-            border-radius: 20px;
-            padding: 2rem;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(15px);
-            box-shadow: 0 4px 20px rgba(0, 255, 136, 0.15);
-        }
-
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--cyber-gradient);
-            box-shadow: 0 0 20px var(--accent-color);
-        }
-
-        .stat-card::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            width: 30%;
-            height: 30%;
-            background: var(--cyber-gradient);
-            opacity: 0.1;
-            border-radius: 50%;
-            transform: translate(50%, 50%);
-            transition: all 0.5s ease;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 15px 30px rgba(0, 255, 136, 0.3);
-            border-color: var(--accent-color);
-            background: rgba(17, 34, 64, 0.98);
-        }
-
-        .stat-card:hover::after {
-            transform: translate(30%, 30%) scale(1.5);
-            opacity: 0.2;
-        }
-
-        .stat-card h3 {
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            color: var(--accent-color);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            background: var(--cyber-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-top: 1rem;
-            font-family: 'Permanent Marker', cursive;
-            text-shadow: 0 0 15px rgba(100, 255, 218, 0.4);
-            display: inline-block;
-            position: relative;
+            transform: translateY(-2px);
         }
 
         .menu-toggle {
             display: none;
-            padding: 1rem;
-            background: var(--cyber-gradient);
-            border: none;
-            border-radius: 50%;
-            color: var(--dark-bg);
-            cursor: pointer;
-            transition: all 0.5s ease;
-            box-shadow: 0 0 20px rgba(100, 255, 218, 0.4);
             position: fixed;
             top: 1rem;
-            right: 1rem;
+            left: 1rem;
             z-index: 1001;
-            width: 50px;
-            height: 50px;
-        }
-
-        .menu-toggle:hover {
-            transform: rotate(180deg) scale(1.15);
-            box-shadow: 0 0 30px rgba(100, 255, 218, 0.6);
+            background: var(--card-bg);
+            border: none;
+            color: var(--text-color);
+            padding: 0.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2rem;
         }
 
         @media (max-width: 768px) {
             .menu-toggle {
-                display: flex;
-                align-items: center;
-                justify-content: center;
+                display: block;
             }
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 255, 136, 0.15);
+            transition: all 0.3s ease;
+            aspect-ratio: 16/9;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 255, 136, 0.3);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+            border: 2px solid var(--border-color);
+        }
+
+        .gallery-item .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(17, 34, 64, 0.9);
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-item .title {
+            color: var(--accent-color);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .gallery-item .date {
+            color: var(--text-color);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .add-image-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--cyber-gradient);
+            border: none;
+            color: var(--dark-bg);
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(100, 255, 218, 0.4);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .add-image-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(100, 255, 218, 0.6);
+        }
+
+        .dialog-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 25, 47, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 999;
+        }
+
+        .dialog {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 0 30px rgba(100, 255, 218, 0.3);
+            width: 90%;
+            max-width: 500px;
+            z-index: 1000;
+        }
+
+        .dialog h2 {
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background: rgba(17, 34, 64, 0.8);
+            color: var(--text-color);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        .dialog-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .dialog-btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn {
+            background: var(--cyber-gradient);
+            color: var(--dark-bg);
+        }
+
+        .cancel-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+        }
+
+        .dialog-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(100, 255, 218, 0.3);
         }
     </style>
 </head>
@@ -404,38 +458,101 @@
 
         <main class="main-content">
             <div class="header">
-                <h1>Dashboard</h1>
+                <h1>Gallery</h1>
                 <div class="profile-section">
                     <span>Hi Admin!</span>
                     <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
                 </div>
             </div>
 
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <h3>Total Members</h3>
-                    <p class="stat-number">256</p>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="/images/gallery/cybersecurity-workshop.jpg" alt="Cybersecurity Workshop">
+                    <div class="overlay">
+                        <h3 class="title">Cybersecurity Workshop</h3>
+                        <p class="date">October 15, 2023</p>
+                    </div>
                 </div>
-                <div class="stat-card">
-                    <h3>Active Projects</h3>
-                    <p class="stat-number">12</p>
+
+                <div class="gallery-item">
+                    <img src="/images/gallery/hackathon-2023.jpg" alt="Hackathon 2023">
+                    <div class="overlay">
+                        <h3 class="title">Hackathon 2023</h3>
+                        <p class="date">October 20, 2023</p>
+                    </div>
                 </div>
-                <div class="stat-card">
-                    <h3>Events This Month</h3>
-                    <p class="stat-number">5</p>
+
+                <div class="gallery-item">
+                    <img src="/images/gallery/team-meeting.jpg" alt="Team Meeting">
+                    <div class="overlay">
+                        <h3 class="title">Team Meeting</h3>
+                        <p class="date">October 25, 2023</p>
+                    </div>
                 </div>
-                <div class="stat-card">
-                    <h3>Gallery Items</h3>
-                    <p class="stat-number">1,234</p>
+
+                <div class="gallery-item">
+                    <img src="/images/gallery/coding-competition.jpg" alt="Coding Competition">
+                    <div class="overlay">
+                        <h3 class="title">Coding Competition</h3>
+                        <p class="date">November 1, 2023</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="/images/gallery/guest-lecture.jpg" alt="Guest Lecture">
+                    <div class="overlay">
+                        <h3 class="title">Guest Lecture</h3>
+                        <p class="date">November 5, 2023</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="/images/gallery/award-ceremony.jpg" alt="Award Ceremony">
+                    <div class="overlay">
+                        <h3 class="title">Award Ceremony</h3>
+                        <p class="date">November 10, 2023</p>
+                    </div>
                 </div>
             </div>
+
+            <button class="add-image-btn">
+                <i class="fas fa-plus"></i>
+            </button>
         </main>
+    </div>
+
+    <div class="dialog-overlay">
+        <div class="dialog">
+            <h2>Add New Image</h2>
+            <form id="addImageForm">
+                <div class="form-group">
+                    <label for="imageTitle">Title</label>
+                    <input type="text" id="imageTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="imageDate">Date</label>
+                    <input type="date" id="imageDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="imageFile">Image</label>
+                    <input type="file" id="imageFile" accept="image/*" required>
+                </div>
+                <div class="dialog-buttons">
+                    <button type="button" class="dialog-btn cancel-btn">Cancel</button>
+                    <button type="submit" class="dialog-btn submit-btn">Add Image</button>
+                </div>
+            </form>
+        </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const menuToggle = document.querySelector('.menu-toggle');
             const sidebar = document.querySelector('.sidebar');
+            const addImageBtn = document.querySelector('.add-image-btn');
+            const dialogOverlay = document.querySelector('.dialog-overlay');
+            const cancelBtn = document.querySelector('.cancel-btn');
+            const addImageForm = document.getElementById('addImageForm');
             
             menuToggle.addEventListener('click', () => {
                 sidebar.classList.toggle('active');
@@ -447,6 +564,22 @@
                     !menuToggle.contains(e.target)) {
                     sidebar.classList.remove('active');
                 }
+            });
+
+            addImageBtn.addEventListener('click', () => {
+                dialogOverlay.style.display = 'block';
+            });
+
+            cancelBtn.addEventListener('click', () => {
+                dialogOverlay.style.display = 'none';
+                addImageForm.reset();
+            });
+
+            addImageForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                // Handle form submission here
+                dialogOverlay.style.display = 'none';
+                addImageForm.reset();
             });
         });
     </script>

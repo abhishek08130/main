@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UU Cyber Warriors - Admin Dashboard</title>
+    <title>UU Cyber Warriors - Members</title>
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
@@ -272,82 +272,6 @@
             box-shadow: 0 5px 15px rgba(100, 255, 218, 0.4);
         }
 
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2.5rem;
-        }
-
-        .stat-card {
-            background: rgba(17, 34, 64, 0.95);
-            border: 2px solid var(--border-color);
-            border-radius: 20px;
-            padding: 2rem;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(15px);
-            box-shadow: 0 4px 20px rgba(0, 255, 136, 0.15);
-        }
-
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--cyber-gradient);
-            box-shadow: 0 0 20px var(--accent-color);
-        }
-
-        .stat-card::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            width: 30%;
-            height: 30%;
-            background: var(--cyber-gradient);
-            opacity: 0.1;
-            border-radius: 50%;
-            transform: translate(50%, 50%);
-            transition: all 0.5s ease;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 15px 30px rgba(0, 255, 136, 0.3);
-            border-color: var(--accent-color);
-            background: rgba(17, 34, 64, 0.98);
-        }
-
-        .stat-card:hover::after {
-            transform: translate(30%, 30%) scale(1.5);
-            opacity: 0.2;
-        }
-
-        .stat-card h3 {
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            color: var(--accent-color);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            background: var(--cyber-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-top: 1rem;
-            font-family: 'Permanent Marker', cursive;
-            text-shadow: 0 0 15px rgba(100, 255, 218, 0.4);
-            display: inline-block;
-            position: relative;
-        }
-
         .menu-toggle {
             display: none;
             padding: 1rem;
@@ -378,6 +302,129 @@
                 justify-content: center;
             }
         }
+
+        .members-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+            background: rgba(17, 34, 64, 0.95);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
+        }
+
+        .members-table th, .members-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .members-table th {
+            background: var(--card-bg);
+            color: var(--accent-color);
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .members-table tr:hover {
+            background: rgba(100, 255, 218, 0.1);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .action-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .edit-btn {
+            background: var(--accent-color);
+            color: var(--dark-bg);
+        }
+
+        .delete-btn {
+            background: #ff4444;
+            color: white;
+        }
+
+        .add-member-btn {
+            padding: 1rem 2rem;
+            background: var(--cyber-gradient);
+            border: none;
+            border-radius: 12px;
+            color: var(--dark-bg);
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .add-member-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(100, 255, 218, 0.4);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 25, 47, 0.9);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            border: 2px solid var(--accent-color);
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--accent-color);
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: rgba(17, 34, 64, 0.95);
+            color: var(--text-color);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -404,32 +451,78 @@
 
         <main class="main-content">
             <div class="header">
-                <h1>Dashboard</h1>
+                <h1>Members Management</h1>
                 <div class="profile-section">
                     <span>Hi Admin!</span>
                     <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
                 </div>
             </div>
 
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <h3>Total Members</h3>
-                    <p class="stat-number">256</p>
-                </div>
-                <div class="stat-card">
-                    <h3>Active Projects</h3>
-                    <p class="stat-number">12</p>
-                </div>
-                <div class="stat-card">
-                    <h3>Events This Month</h3>
-                    <p class="stat-number">5</p>
-                </div>
-                <div class="stat-card">
-                    <h3>Gallery Items</h3>
-                    <p class="stat-number">1,234</p>
-                </div>
-            </div>
+            <button class="add-member-btn" onclick="openModal('add')">
+                <i class="fas fa-plus"></i> Add New Member
+            </button>
+
+            <table class="members-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Department</th>
+                        <th>Role</th>
+                        <th>Join Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>John Doe</td>
+                        <td>john@example.com</td>
+                        <td>Tech</td>
+                        <td>Team Lead</td>
+                        <td>2023-01-15</td>
+                        <td class="action-buttons">
+                            <button class="action-btn edit-btn" onclick="openModal('edit')">Edit</button>
+                            <button class="action-btn delete-btn" onclick="deleteMember()">Delete</button>
+                        </td>
+                    </tr>
+                    <!-- Add more member rows as needed -->
+                </tbody>
+            </table>
         </main>
+    </div>
+
+    <!-- Modal for Add/Edit Member -->
+    <div id="memberModal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()">&times;</button>
+            <h2 id="modalTitle">Add New Member</h2>
+            <form id="memberForm">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="department">Department</label>
+                    <select id="department" required>
+                        <option value="">Select Department</option>
+                        <option value="mentor">Mentor</option>
+                        <option value="tech">Tech</option>
+                        <option value="designing">Designing and Editing</option>
+                        <option value="branding">Branding</option>
+                        <option value="management">Management</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="role">Role</label>
+                    <input type="text" id="role" required>
+                </div>
+                <button type="submit" class="add-member-btn">Save Member</button>
+            </form>
+        </div>
     </div>
 
     <script>
@@ -449,6 +542,31 @@
                 }
             });
         });
+
+        function openModal(type) {
+            const modal = document.getElementById('memberModal');
+            const modalTitle = document.getElementById('modalTitle');
+            modalTitle.textContent = type === 'add' ? 'Add New Member' : 'Edit Member';
+            modal.style.display = 'block';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('memberModal');
+            modal.style.display = 'none';
+        }
+
+        function deleteMember() {
+            if(confirm('Are you sure you want to delete this member?')) {
+                // Add delete functionality here
+            }
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('memberModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
     </script>
-</body>
+</body>  
 </html>

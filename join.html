@@ -139,6 +139,11 @@
             color: var(--secondary-color);
         }
 
+        label::after {
+            content: ' *';
+            color: var(--secondary-color);
+        }
+
         input, select, textarea {
             width: 100%;
             padding: 15px 20px;
@@ -352,6 +357,14 @@
             
             const formData = new FormData(event.target);
             const data = Object.fromEntries(formData.entries());
+
+            // Check if any field is empty
+            for (let key in data) {
+                if (!data[key].trim()) {
+                    alert('All fields are mandatory. Please fill in all the details.');
+                    return;
+                }
+            }
 
             console.log('Form submitted:', data);
 

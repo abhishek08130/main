@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UU Cyber Warriors - Admin Dashboard</title>
+    <title>UU Cyber Warriors - Events</title>
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
@@ -272,80 +272,87 @@
             box-shadow: 0 5px 15px rgba(100, 255, 218, 0.4);
         }
 
-        .stats-grid {
+        .events-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
             margin-bottom: 2.5rem;
         }
 
-        .stat-card {
+        .event-card {
             background: rgba(17, 34, 64, 0.95);
             border: 2px solid var(--border-color);
             border-radius: 20px;
             padding: 2rem;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(15px);
-            box-shadow: 0 4px 20px rgba(0, 255, 136, 0.15);
+            transition: all 0.3s ease;
         }
 
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--cyber-gradient);
-            box-shadow: 0 0 20px var(--accent-color);
-        }
-
-        .stat-card::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            width: 30%;
-            height: 30%;
-            background: var(--cyber-gradient);
-            opacity: 0.1;
-            border-radius: 50%;
-            transform: translate(50%, 50%);
-            transition: all 0.5s ease;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 15px 30px rgba(0, 255, 136, 0.3);
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 255, 136, 0.2);
             border-color: var(--accent-color);
-            background: rgba(17, 34, 64, 0.98);
         }
 
-        .stat-card:hover::after {
-            transform: translate(30%, 30%) scale(1.5);
-            opacity: 0.2;
-        }
-
-        .stat-card h3 {
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
+        .event-date {
+            font-size: 1.2rem;
             color: var(--accent-color);
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            margin-bottom: 1rem;
         }
 
-        .stat-number {
-            font-size: 2.5rem;
+        .event-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .event-description {
+            color: #a8b2d1;
+            margin-bottom: 1.5rem;
+        }
+
+        .event-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .event-button {
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            border: none;
             background: var(--cyber-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-top: 1rem;
-            font-family: 'Permanent Marker', cursive;
-            text-shadow: 0 0 15px rgba(100, 255, 218, 0.4);
-            display: inline-block;
-            position: relative;
+            color: var(--dark-bg);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .event-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(100, 255, 218, 0.4);
+        }
+
+        .create-event-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 1rem;
+            border-radius: 50%;
+            background: var(--cyber-gradient);
+            border: none;
+            color: var(--dark-bg);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3);
+        }
+
+        .create-event-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(0, 255, 136, 0.5);
         }
 
         .menu-toggle {
@@ -366,17 +373,97 @@
             height: 50px;
         }
 
-        .menu-toggle:hover {
-            transform: rotate(180deg) scale(1.15);
-            box-shadow: 0 0 30px rgba(100, 255, 218, 0.6);
-        }
-
         @media (max-width: 768px) {
             .menu-toggle {
                 display: flex;
                 align-items: center;
                 justify-content: center;
             }
+        }
+
+        /* Add/Edit Event Dialog Styles */
+        .event-dialog {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 2px solid var(--accent-color);
+            box-shadow: var(--neon-shadow);
+            z-index: 1000;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .event-dialog.active {
+            display: block;
+        }
+
+        .dialog-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .dialog-close {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .event-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            color: var(--accent-color);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 0.8rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background: rgba(17, 34, 64, 0.8);
+            color: var(--text-color);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        .dialog-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 25, 47, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 999;
+        }
+
+        .dialog-overlay.active {
+            display: block;
         }
     </style>
 </head>
@@ -404,38 +491,104 @@
 
         <main class="main-content">
             <div class="header">
-                <h1>Dashboard</h1>
+                <h1>Events Management</h1>
                 <div class="profile-section">
                     <span>Hi Admin!</span>
                     <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
                 </div>
             </div>
 
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <h3>Total Members</h3>
-                    <p class="stat-number">256</p>
+            <div class="events-grid">
+                <div class="event-card">
+                    <div class="event-date">Oct 15, 2023</div>
+                    <h3 class="event-title">Cybersecurity Workshop</h3>
+                    <p class="event-description">Learn about the latest cybersecurity threats and how to protect against them.</p>
+                    <p class="event-price" style="color: var(--accent-color); margin-bottom: 1rem;">Price: Rs 49.99</p>
+                    <div class="event-actions">
+                        <button class="event-button edit-event-btn">Edit</button>
+                        <button class="event-button">Delete</button>
+                    </div>
                 </div>
-                <div class="stat-card">
-                    <h3>Active Projects</h3>
-                    <p class="stat-number">12</p>
+
+                <div class="event-card">
+                    <div class="event-date">Oct 20, 2023</div>
+                    <h3 class="event-title">Hack-A-Thon</h3>
+                    <p class="event-description">24-hour coding challenge to solve real-world cybersecurity problems.</p>
+                    <p class="event-price" style="color: var(--accent-color); margin-bottom: 1rem;">Price: Rs99.99</p>
+                    <div class="event-actions">
+                        <button class="event-button edit-event-btn">Edit</button>
+                        <button class="event-button">Delete</button>
+                    </div>
                 </div>
-                <div class="stat-card">
-                    <h3>Events This Month</h3>
-                    <p class="stat-number">5</p>
-                </div>
-                <div class="stat-card">
-                    <h3>Gallery Items</h3>
-                    <p class="stat-number">1,234</p>
+
+                <div class="event-card">
+                    <div class="event-date">Oct 25, 2023</div>
+                    <h3 class="event-title">Guest Speaker Series</h3>
+                    <p class="event-description">Industry experts share their experiences and insights.</p>
+                    <p class="event-price" style="color: var(--accent-color); margin-bottom: 1rem;">Price: Free</p>
+                    <div class="event-actions">
+                        <button class="event-button edit-event-btn">Edit</button>
+                        <button class="event-button">Delete</button>
+                    </div>
                 </div>
             </div>
+
+            <button class="create-event-btn">
+                <i class="fas fa-plus"></i>
+            </button>
         </main>
+    </div>
+
+    <!-- Add/Edit Event Dialog -->
+    <div class="dialog-overlay"></div>
+    <div class="event-dialog">
+        <div class="dialog-header">
+            <h2>Add New Event</h2>
+            <button class="dialog-close"><i class="fas fa-times"></i></button>
+        </div>
+        <form class="event-form">
+            <div class="form-group">
+                <label for="event-title">Event Title</label>
+                <input type="text" id="event-title" required>
+            </div>
+            <div class="form-group">
+                <label for="event-date">Event Date</label>
+                <input type="date" id="event-date" required>
+            </div>
+            <div class="form-group">
+                <label for="event-time">Event Time</label>
+                <input type="time" id="event-time" required>
+            </div>
+            <div class="form-group">
+                <label for="event-description">Description</label>
+                <textarea id="event-description" rows="4" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="event-price">Event Price (Rs)</label>
+                <input type="number" id="event-price" step="0.01" min="0" placeholder="0.00" required>
+            </div>
+            <div class="form-group">
+                <label for="registration-link">Registration Link</label>
+                <input type="url" id="registration-link" placeholder="https://" required>
+            </div>
+            <div class="form-group">
+                <label for="event-banner">Event Banner</label>
+                <input type="file" id="event-banner" accept="image/*" required>
+            </div>
+            <button type="submit" class="event-button">Create Event</button>
+        </form>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const menuToggle = document.querySelector('.menu-toggle');
             const sidebar = document.querySelector('.sidebar');
+            const createEventBtn = document.querySelector('.create-event-btn');
+            const eventDialog = document.querySelector('.event-dialog');
+            const dialogOverlay = document.querySelector('.dialog-overlay');
+            const dialogClose = document.querySelector('.dialog-close');
+            const dialogHeader = document.querySelector('.dialog-header h2');
+            const submitButton = document.querySelector('.event-form button[type="submit"]');
             
             menuToggle.addEventListener('click', () => {
                 sidebar.classList.toggle('active');
@@ -447,6 +600,67 @@
                     !menuToggle.contains(e.target)) {
                     sidebar.classList.remove('active');
                 }
+            });
+
+            // Event Dialog Functions
+            createEventBtn.addEventListener('click', () => {
+                dialogHeader.textContent = 'Add New Event';
+                submitButton.textContent = 'Create Event';
+                clearForm();
+                eventDialog.classList.add('active');
+                dialogOverlay.classList.add('active');
+            });
+
+            // Edit Event Button Click Handlers
+            const editButtons = document.querySelectorAll('.edit-event-btn');
+            editButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const eventCard = e.target.closest('.event-card');
+                    const title = eventCard.querySelector('.event-title').textContent;
+                    const date = eventCard.querySelector('.event-date').textContent;
+                    const description = eventCard.querySelector('.event-description').textContent;
+                    const price = eventCard.querySelector('.event-price').textContent.split('Rs')[1];
+
+                    // Populate form with existing data
+                    document.getElementById('event-title').value = title;
+                    document.getElementById('event-description').value = description;
+                    document.getElementById('event-price').value = price === 'Free' ? '0' : price;
+                    
+                    // Convert date string to YYYY-MM-DD format
+                    const dateObj = new Date(date);
+                    document.getElementById('event-date').value = dateObj.toISOString().split('T')[0];
+
+                    dialogHeader.textContent = 'Edit Event';
+                    submitButton.textContent = 'Update Event';
+                    eventDialog.classList.add('active');
+                    dialogOverlay.classList.add('active');
+                });
+            });
+
+            dialogClose.addEventListener('click', () => {
+                eventDialog.classList.remove('active');
+                dialogOverlay.classList.remove('active');
+            });
+
+            dialogOverlay.addEventListener('click', () => {
+                eventDialog.classList.remove('active');
+                dialogOverlay.classList.remove('active');
+            });
+
+            function clearForm() {
+                const form = document.querySelector('.event-form');
+                form.reset();
+            }
+
+            // Handle form submission
+            const eventForm = document.querySelector('.event-form');
+            eventForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                // Add your form submission logic here
+                
+                // Close dialog after submission
+                eventDialog.classList.remove('active');
+                dialogOverlay.classList.remove('active');
             });
         });
     </script>
