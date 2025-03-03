@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UU Cyber Warriors</title>
+    <link rel="icon" type="image/x-icon" href="/images/assets/logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
@@ -37,9 +38,10 @@
             );
             color: white;
             line-height: 1.6;
-            height: 100vh;
+            min-height: 100vh;
             position: relative;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
             perspective: 1000px;
         }
 
@@ -52,7 +54,7 @@
 
         /* Section Container */
         .sections-container {
-            height: 100vh;
+            min-height: 100vh;
             position: relative;
             transition: transform 0.7s ease;
         }
@@ -902,32 +904,262 @@
                 <h1>Welcome to UU Cyber Warriors</h1>
                 <p>Guarding the digital world, one shield at a time.</p>
                 <div class="hero-buttons">
-                    <button class="hero-btn join-btn" onclick="window.location.href='/join'">Join Now</button>
-                    <button class="hero-btn explore-btn" onclick="window.location.href='/explore'">Explore More</button>
+                    <button class="hero-btn join-btn" onclick="window.location.href='/join.html'">Join Now</button>
+                    <button class="hero-btn explore-btn" onclick="document.querySelector('.nav-dot[data-tooltip=\'About\']').click()">Explore More</button>
                 </div>
             </div>
         </section>
 
         <!-- About Section -->
         <section class="about">
+            
             <div class="about-menu">
-                <div class="about-item">
+                <div class="about-item" onclick="showMissionContent()">
                     <div class="about-icon">🎯</div>
                     <h3>Our Mission</h3>
+                    <br>
                     <p>Empowering students with cybersecurity knowledge and practical skills</p>
                 </div>
-                <div class="about-item">
+                <div class="about-item" onclick="showMessageContent()">
                     <div class="about-icon">🌟</div>
                     <h3>Special Message</h3>
-                    <p>A Special Message from Our Director, Head of Department & Head of Cyber Warriors Club</p>
+                    <br>
+                    <p>A Special Message from Our Director and Head of Department</p>
                 </div>
-                <div class="about-item">
+                <div class="about-item" onclick="showUpdatesContent()">
                     <div class="about-icon">📢</div>
                     <h3>Updates</h3>
+                    <br>
                     <p>Stay informed about our latest events, workshops and announcements</p>
                 </div>
             </div>
-        </section>
+
+            <!-- Mission Content -->
+            <div id="mission-content" class="mission-content" style="display: none;">
+                <div class="mission-header">
+                    <h1>Our Mission</h1>
+                </div>
+
+                <div class="mission-cards">
+                    <div class="mission-card">
+                        <h2>Vision</h2>
+                        <p>To become a leading cybersecurity community that empowers students with knowledge and practical skills to protect the digital world.</p>
+                        <ul class="mission-points">
+                            <li>Foster innovation in cybersecurity</li>
+                            <li>Build a strong security-aware community</li>
+                            <li>Develop future cybersecurity leaders</li>
+                        </ul>
+                    </div>
+
+                    <div class="mission-card">
+                        <h2>Objectives</h2>
+                        <ul class="mission-points">
+                            <li>Provide hands-on training in cybersecurity tools</li>
+                            <li>Organize workshops and competitions</li>
+                            <li>Create awareness about cyber threats</li>
+                            <li>Build a network of security professionals</li>
+                        </ul>
+                    </div>
+
+                    <div class="mission-card">
+                        <h2>Values</h2>
+                        <ul class="mission-points">
+                            <li>Ethical conduct in all activities</li>
+                            <li>Continuous learning and improvement</li>
+                            <li>Collaboration and knowledge sharing</li>
+                            <li>Innovation in cybersecurity solutions</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <button class="close-mission" onclick="hideMissionContent()">Close</button>
+            </div>
+
+            <!-- Message Content -->
+            <div id="message-content" class="message-content" style="display: none;">
+                <div class="message-header">
+                    <h1 style="margin-top: 40px; padding-top: 15px;">Special Messages</h1>
+                </div>
+
+                <div class="message-cards">
+                    <div class="message-card">
+                        <div style="display: flex; align-items: center; gap: 20px;">
+                            <div style="position: relative;">
+                                <img src="https://media.licdn.com/dms/image/v2/C4D03AQHluWX1FiqsMQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1652408744109?e=1746662400&v=beta&t=991bNnVIczHFeJ3a62vHLTmxojX2og3en9C6OlRuLQk" alt="Director" class="profile-img" style="border-radius: 50%; position: relative; z-index: 1;">
+                                <div style="position: absolute; top: -2px; left: -2px; right: -2px; bottom: -2px; border-radius: 50%; background: linear-gradient(45deg, #ff00ff, #00ffff); animation: glow 1.5s ease-in-out infinite alternate; filter: blur(1px); z-index: 0;"></div>
+                            </div>
+                            <div>
+                                <h2>Dr. Sonal Sharma</h2>
+                                <div class="designation">Director, USCS</div>
+                            </div>
+                        </div>
+                        <p class="message" style="margin-top: 10px;">As the Director, I am proud to lead this innovative cybersecurity initiative. Our goal is to create a generation of cyber-aware professionals who will shape the future of digital security.</p>
+                    </div>
+
+                    <div class="message-card">
+                        <div style="display: flex; align-items: center; gap: 20px;">
+                            <div style="position: relative;">
+                                <img src="https://media.licdn.com/dms/image/v2/D4D03AQFyxRItItBNhQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1663086595064?e=1746662400&v=beta&t=XaNiy0ZHdCeFKL53Z8EGJINIe-B6lNF4EIKxnpPNrg8" alt="HOD" class="profile-img" style="border-radius: 50%; position: relative; z-index: 1;">
+                                <div style="position: absolute; top: -2px; left: -2px; right: -2px; bottom: -2px; border-radius: 50%; background: linear-gradient(45deg, #ff00ff, #00ffff); animation: glow 1.5s ease-in-out infinite alternate; filter: blur(1px); z-index: 0;"></div>
+                            </div>
+                            <div>
+                                <h2>Dr. Sameer Sharma </h2>
+                                <div class="designation">Head of Department</div>
+                            </div>
+                        </div>
+                        <p class="message" style="margin-top: 10px;">The cybersecurity landscape is evolving rapidly. Our department is committed to providing cutting-edge education and practical training to prepare students for real-world challenges.</p>
+                    </div>
+                </div>
+
+                <button class="close-message" onclick="hideMessageContent()">Close</button>
+            </div>
+
+            <!-- Updates Content -->
+            <div id="updates-content" class="updates-content" style="display: none;">
+                <div class="updates-header">
+                    <h1>Latest Updates</h1>
+                </div>
+
+                <div class="updates-cards" id="updates-container">
+                    <!-- Updates will be loaded dynamically -->
+                </div>
+
+                <button class="close-updates" onclick="hideUpdatesContent()">Close</button>
+            </div>
+
+            <style>
+                .mission-content, .updates-content, .message-content {
+                    width: 90vw;
+                    max-width: 1200px;
+                    margin: 0 auto;
+                    padding: 40px;
+                }
+
+                .mission-header, .updates-header, .message-header {
+            text-align: center;
+                    margin-bottom: 30px;
+                }
+
+                .mission-header h1, .updates-header h1, .message-header h1 {
+                    font-family: 'Press Start 2P', cursive;
+                    background: var(--gradient-1);
+                    -webkit-background-clip: text;
+                    background-clip: text;
+                    color: transparent;
+                    font-size: clamp(2rem, 4vw, 3rem);
+                    margin-bottom: 20px;
+                }
+
+                .mission-cards, .updates-cards, .message-cards {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                    gap: 30px;
+                    margin-top: 20px;
+                }
+
+                .mission-card, .update-card, .message-card {
+                    background: var(--card-bg);
+                    border-radius: 20px;
+                    padding: 30px;
+                    backdrop-filter: blur(10px);
+                    border: 2px solid transparent;
+                    background-image: linear-gradient(var(--card-bg), var(--card-bg)), 
+                                    linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+                    background-origin: border-box;
+                    background-clip: padding-box, border-box;
+                    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+                    transition: transform 0.3s ease;
+                }
+
+                .close-mission, .close-updates, .close-message {
+                    display: block;
+                    margin: 40px auto 0;
+                    padding: 12px 30px;
+                    background: var(--gradient-1);
+                    border: none;
+                    border-radius: 25px;
+                    color: white;
+                    font-family: 'Press Start 2P', cursive;
+                    font-size: 0.9rem;
+                    cursor: pointer;
+                    transition: transform 0.3s ease, box-shadow 0.3s ease;
+                }
+
+                @media (max-width: 768px) {
+                    .mission-content, .updates-content, .message-content {
+                        padding: 20px;
+                    }
+
+                    .mission-card, .update-card, .message-card {
+                        padding: 20px;
+                    }
+                }
+            </style>
+
+            <script>
+                function showMissionContent() {
+                    document.getElementById('mission-content').style.display = 'block';
+                    document.getElementById('updates-content').style.display = 'none';
+                    document.getElementById('message-content').style.display = 'none';
+                    document.querySelector('.about-menu').style.display = 'none';
+                }
+
+                function hideMissionContent() {
+                    document.getElementById('mission-content').style.display = 'none';
+                    document.querySelector('.about-menu').style.display = 'grid';
+                }
+
+                function showMessageContent() {
+                    document.getElementById('message-content').style.display = 'block';
+                    document.getElementById('mission-content').style.display = 'none';
+                    document.getElementById('updates-content').style.display = 'none';
+                    document.querySelector('.about-menu').style.display = 'none';
+                }
+
+                function hideMessageContent() {
+                    document.getElementById('message-content').style.display = 'none';
+                    document.querySelector('.about-menu').style.display = 'grid';
+                }
+
+                function showUpdatesContent() {
+                    document.getElementById('updates-content').style.display = 'block';
+                    document.getElementById('mission-content').style.display = 'none';
+                    document.getElementById('message-content').style.display = 'none';
+                    document.querySelector('.about-menu').style.display = 'none';
+                    fetchUpdates();
+                }
+
+                function hideUpdatesContent() {
+                    document.getElementById('updates-content').style.display = 'none';
+                    document.querySelector('.about-menu').style.display = 'grid';
+                }
+
+                async function fetchUpdates() {
+                    try {
+                        const response = await fetch('/api/updates');
+                        const updates = await response.json();
+                        
+                        const updatesContainer = document.getElementById('updates-container');
+                        updatesContainer.innerHTML = '';
+                        
+                        updates.forEach(update => {
+                            const updateCard = `
+                                <div class="update-card">
+                                    <div class="update-date">${update.date}</div>
+                                    <h2>${update.title}</h2>
+                                    <p>${update.description}</p>
+                                </div>
+                            `;
+                            updatesContainer.innerHTML += updateCard;
+                        });
+
+                    } catch (error) {
+                        console.error('Error fetching updates:', error);
+                        document.getElementById('updates-container').innerHTML = '<p>Failed to load updates. Please try again later.</p>';
+                    }
+                }
+            </script>
+        </section>  
 
         <!-- Events Section -->
         <section class="events">
@@ -1141,8 +1373,7 @@
                     position: absolute;
                     top: 0;
                     left: 0;
-                    right: 0;
-                    bottom: 0;
+            bottom: 0;
                     background: linear-gradient(
                         135deg,
                         rgba(255, 255, 255, 0.1) 0%,
@@ -1432,7 +1663,7 @@
 
             .gallery-image {
                 position: relative;
-                width: 100%;
+            width: 100%;
                 height: 100%;
                 overflow: hidden;
             }
@@ -1579,6 +1810,9 @@
                             </a>
                         </div>
                     </div>
+
+                    <!-- Added Copyright Text -->
+                    <p style="text-align: center; color: rgba(255, 255, 255, 0.8); font-family: 'Press Start 2P', cursive; font-size: 0.8rem; margin-top: 2rem;">&copy; 2024 UU Cyber Warriors</p>
                 </div>
             </div>
         </section>
@@ -1599,7 +1833,7 @@
                 text-align: center;
                 font-size: 2.5rem;
                 margin-bottom: 2rem;
-                color: var(--primary-color);
+            color: var(--primary-color);
                 font-weight: bold;
             }
 
@@ -1651,7 +1885,7 @@
             .contact-card p {
                 color: #fff;
                 line-height: 1.5;
-                font-size: 0.9rem;
+            font-size: 0.9rem;
             }
 
             .contact-card a {
@@ -1715,9 +1949,9 @@
 
             .social-icon:hover img {
                 transform: scale(1.2);
-            }
+        }
 
-            @media (max-width: 768px) {
+        @media (max-width: 768px) {
                 .contact-heading {
                     font-size: 2rem;
                 }
@@ -1887,9 +2121,10 @@
                     }
                 }
             }
+            
 
             // Auto slide every 5 seconds
             setInterval(() => showSlide(currentSlide + 1), 5000);
         </script>
     </body>
-    </html>
+</html>

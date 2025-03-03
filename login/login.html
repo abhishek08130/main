@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UU Cyber Warriors - Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #00ff88;
+            --secondary-color: #00cc6a;
+            --dark-bg: #0a192f;
+            --card-bg: #112240;
+            --border-color: #233554;
+            --text-color: #e6f1ff;
+            --accent-color: #64ffda;
+            --gradient: linear-gradient(45deg, #00ff88, #00f5ff);
+            --neon-shadow: 0 0 15px rgba(0, 255, 136, 0.6),
+                          0 0 30px rgba(0, 255, 136, 0.4),
+                          0 0 45px rgba(0, 255, 136, 0.2);
+            --cyber-gradient: linear-gradient(135deg, #00ff88 0%, #00f5ff 50%, #64ffda 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: 
+                linear-gradient(rgba(10, 25, 47, 0.9), rgba(10, 25, 47, 0.9)),
+                url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAwIDYwIEwgNjAgMCIgc3Ryb2tlPSJyZ2JhKDEwMCwgMjU1LCAyMTgsIDAuMSkiIHN0cm9rZS13aWR0aD0iMC41Ii8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+');
+        }
+
+        .login-container {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: var(--neon-shadow);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid var(--accent-color);
+        }
+
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: var(--cyber-gradient);
+            animation: rotate 4s linear infinite;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .login-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .login-header img {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 1rem;
+        }
+
+        .login-header h1 {
+            color: var(--text-color);
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(17, 34, 64, 0.8);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-color);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 10px rgba(100, 255, 218, 0.3);
+            outline: none;
+        }
+
+        .form-group i {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent-color);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--cyber-gradient);
+            border: none;
+            border-radius: 8px;
+            color: var(--dark-bg);
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(100, 255, 218, 0.4);
+        }
+
+        .forgot-password {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .forgot-password a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .forgot-password a:hover {
+            color: var(--primary-color);
+            text-shadow: 0 0 5px rgba(100, 255, 218, 0.6);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 25, 47, 0.9);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 400px;
+            border: 2px solid var(--accent-color);
+            color: var(--text-color);
+            text-align: center;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-content">
+            <div class="login-header">
+                <img src="/images/assets/logo.png" alt="UU Cyber Warriors Logo">
+                <h1>UU Cyber Warriors</h1>
+            </div>
+            <form>
+                <div class="form-group">
+                    <input type="email" placeholder="Email" required>
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="Password" required>
+                    <i class="fas fa-lock"></i>
+                </div>
+                <button type="submit" class="login-btn">Login</button>
+                <div class="forgot-password">
+                    <a onclick="showModal()">Forgot Password?</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="forgotModal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()">&times;</button>
+            <h2>Password Recovery</h2>
+            <p>Please contact the Tech Department for password recovery assistance.</p>
+        </div>
+    </div>
+
+    <script>
+        function showModal() {
+            document.getElementById('forgotModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('forgotModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('forgotModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

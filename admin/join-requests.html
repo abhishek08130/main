@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UU Cyber Warriors - Members</title>
+    <title>UU Cyber Warriors - Join Requests</title>
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
@@ -354,6 +354,11 @@
             color: white;
         }
 
+        .view-btn {
+            background: var(--primary-color);
+            color: var(--dark-bg);
+        }
+
         .add-member-btn {
             padding: 1rem 2rem;
             background: var(--cyber-gradient);
@@ -406,7 +411,7 @@
             color: var(--accent-color);
         }
 
-        .form-group input, .form-group select {
+        .form-group input, .form-group select, .form-group textarea {
             width: 100%;
             padding: 0.8rem;
             border: 1px solid var(--border-color);
@@ -424,6 +429,45 @@
             color: var(--text-color);
             font-size: 1.5rem;
             cursor: pointer;
+        }
+
+        .details-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 25, 47, 0.9);
+            z-index: 1000;
+        }
+
+        .details-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            border: 2px solid var(--accent-color);
+            color: var(--text-color);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .details-row {
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .details-label {
+            color: var(--accent-color);
+            font-weight: bold;
+            margin-bottom: 0.3rem;
         }
     </style>
 </head>
@@ -451,25 +495,21 @@
 
         <main class="main-content">
             <div class="header">
-                <h1>Members Management</h1>
+                <h1>Join Requests</h1>
                 <div class="profile-section">
                     <span>Hi Admin!</span>
                     <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
                 </div>
             </div>
 
-            <button class="add-member-btn" onclick="openModal('add')">
-                <i class="fas fa-plus"></i> Add New Member
-            </button>
-
             <table class="members-table">
                 <thead>
                     <tr>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>Department</th>
-                        <th>Role</th>
-                        <th>Join Date</th>
+                        <th>Course</th>
+                        <th>Year</th>
+                        <th>Status</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -477,51 +517,61 @@
                     <tr>
                         <td>John Doe</td>
                         <td>john@example.com</td>
-                        <td>Tech</td>
-                        <td>Team Lead</td>
-                        <td>2023-01-15</td>
+                        <td>B.Tech CSE</td>
+                        <td>2nd Year</td>
+                        <td>Pending</td>
                         <td class="action-buttons">
-                            <button class="action-btn edit-btn" onclick="openModal('edit')">Edit</button>
-                            <button class="action-btn delete-btn" onclick="deleteMember()">Delete</button>
+                            <button class="action-btn view-btn" onclick="showDetails(this)">View Details</button>
+                            <button class="action-btn edit-btn">Approve</button>
+                            <button class="action-btn delete-btn">Reject</button>
                         </td>
                     </tr>
-                    <!-- Add more member rows as needed -->
                 </tbody>
             </table>
         </main>
     </div>
 
-    <!-- Modal for Add/Edit Member -->
-    <div id="memberModal" class="modal">
-        <div class="modal-content">
-            <button class="close-modal" onclick="closeModal()">&times;</button>
-            <h2 id="modalTitle">Add New Member</h2>
-            <form id="memberForm">
-                <div class="form-group">
-                    <label for="name">Full Name</label>
-                    <input type="text" id="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="department">Department</label>
-                    <select id="department" required>
-                        <option value="">Select Department</option>
-                        <option value="mentor">Mentor</option>
-                        <option value="tech">Tech</option>
-                        <option value="designing">Designing and Editing</option>
-                        <option value="branding">Branding</option>
-                        <option value="management">Management</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="role">Role</label>
-                    <input type="text" id="role" required>
-                </div>
-                <button type="submit" class="add-member-btn">Save Member</button>
-            </form>
+    <!-- Details Modal -->
+    <div id="detailsModal" class="details-modal">
+        <div class="details-content">
+            <button class="close-modal" onclick="closeDetailsModal()"><i class="fas fa-times"></i></button>
+            <h2 style="margin-bottom: 1.5rem; color: var(--accent-color);">Application Details</h2>
+            <div class="details-row">
+                <div class="details-label">Full Name</div>
+                <div id="detailsName"></div>
+            </div>
+            <div class="details-row">
+                <div class="details-label">Email</div>
+                <div id="detailsEmail"></div>
+            </div>
+            <div class="details-row">
+                <div class="details-label">Phone Number</div>
+                <div id="detailsPhone"></div>
+            </div>
+            <div class="details-row">
+                <div class="details-label">University Roll No</div>
+                <div id="detailsRollNo"></div>
+            </div>
+            <div class="details-row">
+                <div class="details-label">Course</div>
+                <div id="detailsCourse"></div>
+            </div>
+            <div class="details-row">
+                <div class="details-label">Year of Study</div>
+                <div id="detailsYear"></div>
+            </div>
+            <div class="details-row">
+                <div class="details-label">Section</div>
+                <div id="detailsSection"></div>
+            </div>
+            <div class="details-row">
+                <div class="details-label">Technical Skills</div>
+                <div id="detailsSkills"></div>
+            </div>
+            <div class="details-row">
+                <div class="details-label">Why do you want to join us?</div>
+                <div id="detailsReason"></div>
+            </div>
         </div>
     </div>
 
@@ -543,30 +593,48 @@
             });
         });
 
-        function openModal(type) {
-            const modal = document.getElementById('memberModal');
-            const modalTitle = document.getElementById('modalTitle');
-            modalTitle.textContent = type === 'add' ? 'Add New Member' : 'Edit Member';
+        function showDetails(button) {
+            const row = button.closest('tr');
+            const modal = document.getElementById('detailsModal');
+            
+            // Get data from the row (in a real application, this would come from your database)
+            const name = row.cells[0].textContent;
+            const email = row.cells[1].textContent;
+            const course = row.cells[2].textContent;
+            const year = row.cells[3].textContent;
+            
+            // Sample data (in a real application, this would come from your database)
+            const phone = "+91 9876543210";
+            const rollNo = "12345678";
+            const section = "A";
+            const skills = "Python, Java, Web Development, Basic Networking";
+            const reason = "I am passionate about cybersecurity and want to learn more about ethical hacking and network security. I have been following the club's activities and believe it would be a great platform to enhance my skills and contribute to the cybersecurity community.";
+            
+            // Populate the modal
+            document.getElementById('detailsName').textContent = name;
+            document.getElementById('detailsEmail').textContent = email;
+            document.getElementById('detailsPhone').textContent = phone;
+            document.getElementById('detailsRollNo').textContent = rollNo;
+            document.getElementById('detailsCourse').textContent = course;
+            document.getElementById('detailsYear').textContent = year;
+            document.getElementById('detailsSection').textContent = section;
+            document.getElementById('detailsSkills').textContent = skills;
+            document.getElementById('detailsReason').textContent = reason;
+            
             modal.style.display = 'block';
         }
 
-        function closeModal() {
-            const modal = document.getElementById('memberModal');
-            modal.style.display = 'none';
+        function closeDetailsModal() {
+            document.getElementById('detailsModal').style.display = 'none';
         }
 
-        function deleteMember() {
-            if(confirm('Are you sure you want to delete this member?')) {
-                // Add delete functionality here
-            }
-        }
-
+        // Close modal when clicking outside
         window.onclick = function(event) {
-            const modal = document.getElementById('memberModal');
+            const modal = document.getElementById('detailsModal');
             if (event.target == modal) {
-                closeModal();
+                modal.style.display = 'none';
             }
         }
     </script>
-</body>  
+</body>
 </html>

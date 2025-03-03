@@ -378,6 +378,110 @@
                 justify-content: center;
             }
         }
+
+        .update-about-btn, .update-display-btn {
+            display: block;
+            margin: 2rem auto;
+            padding: 1rem 2rem;
+            background: var(--cyber-gradient);
+            border: none;
+            border-radius: 12px;
+            color: var(--dark-bg);
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 20px rgba(100, 255, 218, 0.4);
+        }
+
+        .update-about-btn:hover, .update-display-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 25px rgba(100, 255, 218, 0.6);
+        }
+
+        /* Dialog styles */
+        .dialog-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 25, 47, 0.9);
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .dialog-box {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 2px solid var(--accent-color);
+            box-shadow: var(--neon-shadow);
+            width: 90%;
+            max-width: 500px;
+            z-index: 1001;
+        }
+
+        .dialog-box h2 {
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .dialog-box input,
+        .dialog-box textarea {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-color);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .dialog-box textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .dialog-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .dialog-btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .save-btn {
+            background: var(--cyber-gradient);
+            color: var(--dark-bg);
+        }
+
+        .cancel-btn {
+            background: transparent;
+            border: 1px solid var(--accent-color);
+            color: var(--text-color);
+        }
+
+        .dialog-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(100, 255, 218, 0.4);
+        }
     </style>
 </head>
 <body>
@@ -429,13 +533,39 @@
                     <p class="stat-number">1,234</p>
                 </div>
             </div>
+
+            <button class="update-about-btn">
+                <i class="fas fa-edit"></i> Update About Club
+            </button>
+
+            <button class="update-display-btn">
+                <i class="fas fa-desktop"></i> Update Display
+            </button>
         </main>
+    </div>
+
+    <!-- Dialog Box -->
+    <div class="dialog-overlay" id="dialogOverlay">
+        <div class="dialog-box">
+            <h2>Update About Club</h2>
+            <input type="text" id="aboutTitle" placeholder="Enter Title" required>
+            <textarea id="aboutDescription" placeholder="Enter Description" required></textarea>
+            <div class="dialog-buttons">
+                <button class="dialog-btn cancel-btn" id="cancelBtn">Cancel</button>
+                <button class="dialog-btn save-btn" id="saveBtn">Save Changes</button>
+            </div>
+        </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const menuToggle = document.querySelector('.menu-toggle');
             const sidebar = document.querySelector('.sidebar');
+            const updateAboutBtn = document.querySelector('.update-about-btn');
+            const updateDisplayBtn = document.querySelector('.update-display-btn');
+            const dialogOverlay = document.getElementById('dialogOverlay');
+            const cancelBtn = document.getElementById('cancelBtn');
+            const saveBtn = document.getElementById('saveBtn');
             
             menuToggle.addEventListener('click', () => {
                 sidebar.classList.toggle('active');
@@ -446,6 +576,41 @@
                     !sidebar.contains(e.target) && 
                     !menuToggle.contains(e.target)) {
                     sidebar.classList.remove('active');
+                }
+            });
+
+            // Dialog functionality
+            updateAboutBtn.addEventListener('click', () => {
+                dialogOverlay.style.display = 'block';
+            });
+
+            updateDisplayBtn.addEventListener('click', () => {
+                // Add display update functionality here
+                window.location.href = 'display-settings.html';
+            });
+
+            cancelBtn.addEventListener('click', () => {
+                dialogOverlay.style.display = 'none';
+            });
+
+            saveBtn.addEventListener('click', () => {
+                const title = document.getElementById('aboutTitle').value;
+                const description = document.getElementById('aboutDescription').value;
+                
+                if (title && description) {
+                    // Here you can add code to save the data
+                    console.log('Title:', title);
+                    console.log('Description:', description);
+                    dialogOverlay.style.display = 'none';
+                } else {
+                    alert('Please fill in all fields');
+                }
+            });
+
+            // Close dialog when clicking outside
+            dialogOverlay.addEventListener('click', (e) => {
+                if (e.target === dialogOverlay) {
+                    dialogOverlay.style.display = 'none';
                 }
             });
         });
